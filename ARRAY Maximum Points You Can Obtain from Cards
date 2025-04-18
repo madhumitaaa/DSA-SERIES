@@ -1,0 +1,26 @@
+https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+
+#include<bits/stdc++.h>
+#include<numeric>
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int n=cardPoints.size();
+        int totalsum=accumulate(cardPoints.begin(),cardPoints.end(),0);
+        if(k>n)return 0;
+        if(k==n)return totalsum;
+        int windowsize=n-k;//if we choose k size window as max that means n-k size window should have kleast sum total-least will be our answer
+        int currsum=0;
+        for(int i=0;i<windowsize;i++)
+        {
+                currsum+=cardPoints[i];
+        }
+        int minw=currsum;
+        for(int i=windowsize;i<n;i++)
+        {
+            currsum+=cardPoints[i]-cardPoints[i-windowsize];
+            minw=min(currsum,minw);
+        }
+        return totalsum-minw;
+    }
+};
