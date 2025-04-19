@@ -1,0 +1,23 @@
+https://leetcode.com/problems/subarray-sums-divisible-by-k/description/
+class Solution {
+public:
+     int subarraysDivByK(vector<int>& nums, int k) {
+        int n=nums.size();
+        unordered_map<int,int>mpp;
+        int sum=0,c=0;
+        mpp[0]=1;
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+            int r=((sum%k)+k)%k;
+            if(mpp.find(r)!=mpp.end())
+            {
+                        c+=mpp[r];
+            }
+            mpp[r]++;
+
+        } 
+        return c;
+     }
+    
+};
