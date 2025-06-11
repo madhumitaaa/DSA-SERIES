@@ -1,0 +1,32 @@
+https://leetcode.com/problems/longest-palindromic-substring/submissions/1660268164/
+
+class Solution {
+public:
+void expand(const string&s,int left,int right,int &start,int &maxlen)
+{
+    while(left>=0&&right<s.size()&&s[left]==s[right])
+    {
+            if(right-left+1>maxlen)
+            {
+                start=left;
+                maxlen=right-left+1;
+
+            }
+            left--;right++;
+    }
+
+}
+
+
+
+    string longestPalindrome(string s) {
+        int start=0;int maxlen=0;
+        for (int i=0;i<s.size();i++)
+        {
+            expand(s,i,i,start,maxlen);//odd
+              expand(s,i,i+1,start,maxlen);//even
+        }
+      return s.substr(start, maxlen);
+    }
+
+};
