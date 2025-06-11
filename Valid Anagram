@@ -1,0 +1,19 @@
+https://leetcode.com/problems/valid-anagram/submissions/1660300255/
+
+#include<bits/stdc++.h>
+#include<sstream>
+#include<vector>
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int n=s.size();int h=t.size();
+        if(n!=h)return false;
+      sort(s.begin(),s.end());
+       sort(t.begin(),t.end());
+       for(int i=0;i<n;i++)
+       {
+        if(s[i]!=t[i])return false;
+       }
+return true;
+    }
+};
