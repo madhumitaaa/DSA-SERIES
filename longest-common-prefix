@@ -1,0 +1,22 @@
+https://leetcode.com/problems/longest-common-prefix/submissions/1661589812/
+
+
+
+#include<string>
+#include<algorithm>
+#include<bits/stdc++.h>
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+         if (strs.empty()) return "";
+        sort(strs.begin(),strs.end());
+      const  string &a=strs.front(),&b=strs.back();
+        int i=0,n=min(a.size(),b.size());
+        while(i<n&&a[i]==b[i])
+        {
+                i++;
+        }
+        return a.substr(0,i);
+        
+    }
+};
