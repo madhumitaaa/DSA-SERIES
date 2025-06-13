@@ -1,0 +1,14 @@
+https://leetcode.com/problems/power-of-two/submissions/1663180156/?envType=problem-list-v2&envId=recursion
+
+
+#include<bits/stdc++.h>
+class Solution {
+public:
+
+    bool isPowerOfTwo(int n) {
+        if(n==1)return true;
+          if(n<2||n%2!=0)return false;
+         return isPowerOfTwo(n/2);
+
+    }
+};
