@@ -1,0 +1,31 @@
+https://www.geeksforgeeks.org/problems/sum-of-array2326/1
+
+
+// User function template for C++
+class Solution {
+  public:
+  
+  
+  
+   int arrsum(vector<int>&arr,int index)
+  {
+      
+      if(index==arr.size())
+      {
+          return 0;
+      }
+      if(arr.size()==1)return arr[0];
+       return arr[index]+arrsum(arr,index+1);
+  }
+  
+  
+  
+  
+  
+  
+    // Function to return sum of elements
+    int arraySum(vector<int>&arr) {
+        // code here
+        return arrsum(arr,0);
+    }
+};
