@@ -1,0 +1,33 @@
+https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1
+
+
+class Solution {
+  public:
+  
+  bool issort(vector<int>& arr,int index)
+  {
+      if(index==arr.size()-1)return true;
+      
+      if(arr[index]>arr[index+1])
+      {
+          return false;
+      }
+      
+      return issort(arr,index+1);
+      
+      
+      
+      
+      
+      
+  }
+  
+  
+  
+  
+  
+    bool arraySortedOrNot(vector<int>& arr) {
+        // code here
+        return issort(arr,0);
+    }
+};
