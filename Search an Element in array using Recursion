@@ -1,0 +1,24 @@
+https://www.geeksforgeeks.org/problems/search-an-element-in-an-array-1587115621/1
+
+class Solution {
+  public:
+    // Function to search x in arr
+    // arr: input array
+    // X: element to be searched for
+    int ls(vector<int>& arr,int size, int x,int index)
+    {
+           if(index==size)return -1;
+            if(arr[index]==x)return index;
+          return ls(arr,size,x,index+1);
+    
+    }
+    
+    
+    
+    int search(vector<int>& arr, int x) {
+
+        // Your code here
+        return ls(arr,arr.size(),x,0);
+   
+    }
+};
