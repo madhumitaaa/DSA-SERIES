@@ -1,0 +1,87 @@
+https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1&selectedLang=python3
+/*
+vector of string paths
+find the size of maze
+create a helper function findpaths pass the  maze and size
+in that findpaths create string path "" and the visited array with values initialised as 0
+call the void function pass 0,0,maze,n,visited,path
+if the consition hits the base pushback path into paths 
+mark them as visited chech if they are safe then umark them at end 
+create a bool isisafe function to check if the box is safe or not 
+  
+
+
+*/
+
+
+class Solution {
+  public:
+  vector<string>paths;
+   vector<string> ratInMaze(vector<vector<int>>& maze) {
+        // code here
+        int n=maze.size();
+        paths.clear();
+        return findpath(maze,n);
+        
+    }
+  
+  vector<string> findpath(vector<vector<int>>& maze,int n)
+  {
+        vector<vector<int>>visited(n,vector<int>(n,0));
+        string path="";
+        if(maze[0][0]==1)
+        {
+            solve(0,0,maze,n,visited,path);
+        }
+        return paths;
+  }
+  
+  void solve(int i ,int j,vector<vector<int>>& maze,int n, vector<vector<int>>&visited,string path)
+  {
+      if(i==n-1&&j==n-1)
+      {
+          paths.push_back(path);
+          return;
+      }
+      visited[i][j]=1;
+      if(issafe(i+1,j,maze,n,visited))
+      {
+          solve(i+1,j,maze,n,visited,path+'D');
+          
+      }
+         if(issafe(i,j-1,maze,n,visited))
+      {
+          solve(i,j-1,maze,n,visited,path+'L');
+          
+      }
+          if(issafe(i,j+1,maze,n,visited))
+      {
+          solve(i,j+1,maze,n,visited,path+'R');
+          
+      }
+       
+        if(issafe(i-1,j,maze,n,visited))
+      {
+          solve(i-1,j,maze,n,visited,path+'U');
+          
+      }
+
+      
+      visited[i][j]=0;
+  }
+      
+     
+  
+  
+  
+  bool issafe(int i ,int j,vector<vector<int>>& maze,int n, vector<vector<int>>&visited)
+  {
+      return (i>=0&&i<n&&j>=0&&j<n&&maze[i][j]==1&&visited[i][j]==0);
+  }
+  
+  
+  
+  
+  
+ 
+}; 
