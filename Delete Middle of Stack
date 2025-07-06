@@ -1,0 +1,39 @@
+https://www.geeksforgeeks.org/problems/delete-middle-element-of-a-stack/1
+
+
+class Solution {
+  public:
+  
+  void helper(stack<int>& s,int current,int mid )
+  {
+       if(current==mid)
+       {
+           s.pop();
+           return;
+       }
+       int temp=s.top();
+       s.pop();
+       
+       helper(s,current+1,mid);
+       
+       s.push(temp);
+       
+       
+       
+  }
+  
+  
+ 
+    // Function to delete middle element of a stack.
+    void deleteMid(stack<int>& s) {
+        
+        int size=s.size();
+        int mid=s.size()/2;
+        return helper(s,0,mid);
+        
+        
+        
+        
+        // code here..
+    }
+    
