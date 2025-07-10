@@ -1,0 +1,26 @@
+https://www.geeksforgeeks.org/problems/insert-an-element-at-the-bottom-of-a-stack/1
+
+// User function Template for C++
+
+class Solution {
+  public:
+  void solve(stack<int>&st,int x)
+  {
+      if(st.empty())
+      {
+          st.push(x);
+          return;
+      }
+      int topelem=st.top();
+      st.pop();
+      solve(st,x);
+      st.push(topelem);
+      
+  }
+  
+    stack<int> insertAtBottom(stack<int> st, int x) {
+        
+        solve(st,x);
+        return st;
+    }
+};
