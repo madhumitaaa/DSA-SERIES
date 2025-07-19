@@ -1,0 +1,20 @@
+https://leetcode.com/problems/max-consecutive-ones/submissions/1704007907/
+
+
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int cnt=0,maxo=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]==1){
+                cnt++;
+                maxo=max(cnt,maxo);
+            }
+             else{
+                cnt=0;
+             }
+        }
+        return maxo;
+    }
+};
