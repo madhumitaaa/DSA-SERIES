@@ -1,0 +1,44 @@
+https://www.geeksforgeeks.org/problems/the-celebrity-problem/1
+
+
+
+
+class Solution {
+  public:
+    int celebrity(vector<vector<int> >& mat) {
+        // code here
+        stack<int>st;
+        int n=mat.size();
+        for(int i=0;i<n;i++)
+        {
+            st.push(i);
+        }
+        while(st.size()>1)
+        {
+            int a=st.top();st.pop();
+            int b=st.top();st.pop();
+            
+        
+        if(mat[a][b]==1)
+        {
+            st.push(b);
+        }
+         else{
+            st.push(a);
+         }
+        }
+         int cand=st.top();
+         for(int i=0;i<n;i++)
+         {
+             //check row -cand should know no one
+             if(i!=cand && mat[cand][i]==1)return -1;
+         }
+         
+           for(int i=0;i<n;i++)
+         {
+             //check col everyone should know cand
+             if(i!=cand && mat[i][cand]==0)return -1;
+         }
+         return cand;
+    }
+};
