@@ -1,0 +1,60 @@
+https://takeuforward.org/plus/dsa/problems/flattening-of-ll
+
+/*
+Definition of special linked list:
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode *child;
+    ListNode()
+    {
+        val = 0;
+        next = NULL;
+        child = NULL;
+    }
+    ListNode(int data1)
+    {
+        val = data1;
+        next = NULL;
+        child = NULL;
+    }
+    ListNode(int data1, ListNode *next1, ListNode* next2)
+    {
+        val = data1;
+        next = next1;
+        child = next2;
+    }
+};
+*/
+
+class Solution {
+public:
+ListNode* merge(ListNode* a,ListNode* b){
+    if(!a)return b;
+     if(!b)return a;
+     ListNode* result;
+     if(a->val < b->val){
+        result =a;
+        result->child=merge(a->child,b);
+     }
+       else{
+        result =b;
+        result->child=merge(a,b->child);
+     }
+result->next=NULL;
+return result;
+}
+
+
+
+    ListNode* flattenLinkedList(ListNode* &head) {
+        if(!head||!head->next){
+            return head;
+        }
+        head->next=flattenLinkedList(head->next);
+        head=merge(head,head->next);
+        return head;
+
+    }
+};
