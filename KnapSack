@@ -1,0 +1,30 @@
+https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
+
+class Solution {
+public:
+    int solve(int W, vector<int> &val, vector<int> &wt, vector<vector<int>> &dp, int index) {
+        if(index == 0) {
+            if(wt[0] <= W) return val[0];
+            else return 0;
+        }
+
+        if(dp[index][W] != -1) return dp[index][W];
+
+        int include = 0;
+        if(wt[index] <= W) {
+            include = val[index] + solve(W - wt[index], val, wt, dp, index - 1);
+        }
+        int exclude = solve(W, val, wt, dp, index - 1);
+
+        return dp[index][W] = max(include, exclude);
+    }
+
+    int knapsack(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();
+        vector<vector<int>> dp(n, vector<int>(W + 1, -1)); 
+        return solve(W, val, wt, dp, n - 1);
+    }
+};
+
+
+
