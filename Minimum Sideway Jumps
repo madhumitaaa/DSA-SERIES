@@ -1,0 +1,44 @@
+https://leetcode.com/problems/minimum-sideway-jumps/submissions/1726717181/
+
+class Solution {
+public:
+
+
+int solve(vector<int>& obstacles,int currlane,int currpos, vector<vector<int>>&dp,int n)
+{
+    if(currpos==n-1)return 0;
+    if(dp[currlane][currpos]!=-1)return dp[currlane][currpos];
+  //no obstacles
+    if(currpos+1<n &&obstacles[currpos+1]!=currlane)return solve(obstacles,currlane,currpos+1,dp,n);
+
+    int ans=INT_MAX;
+    for(int i=1;i<=3;i++){
+        // 3 lanes are there
+        if(i!=currlane && obstacles[currpos]!=i){
+            int temp=solve(obstacles,i,currpos,dp,n);
+           if (temp != INT_MAX) {
+                       ans = min(ans, 1 + temp);
+             }
+        }
+    }
+
+
+dp[currlane][currpos]=ans;
+return dp[currlane][currpos];
+
+
+
+
+
+
+}
+
+
+
+    int minSideJumps(vector<int>& obstacles) {
+        int currlane=2,currpos=0,n=obstacles.size();
+        vector<vector<int>>dp(4,vector<int>(n,-1));
+     return   solve(obstacles,currlane,currpos,dp,n);
+        
+    }
+};
