@@ -1,0 +1,24 @@
+https://leetcode.com/problems/maximum-product-subarray/submissions/1731825586/
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n= nums.size();
+        long maxending=nums[0];
+         long minending=nums[0];
+         long ans=nums[0];
+
+         for(int i=1;i<n;i++)
+         {
+            long long x=nums[i];
+            long long prevmax=maxending;
+            long long prevmin=minending;
+            maxending=max(x,max(x*prevmax,x*prevmin));
+            minending=min(x,min(x*prevmax,x*prevmin));
+            ans=max(ans,maxending);
+         }
+
+return static_cast<int>(ans);
+        
+    }
+};
