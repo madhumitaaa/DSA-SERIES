@@ -1,0 +1,29 @@
+https://leetcode.com/problems/pizza-with-3n-slices/submissions/1736657394/
+
+
+class Solution {
+public:
+
+int solve(vector<int>& slices,int n,int t,int i,vector<vector<int>>&dp){
+    if(t==0)return 0;
+    if(i>=slices.size())
+    return INT_MIN/4;
+    if(dp[i][t]!=-1)return dp[i][t];
+    int take=slices[i]+solve(slices,n,t-1,i+2,dp);
+    int skip=solve(slices,n,t,i+1,dp);
+    return dp[i][t]=max(take,skip);
+}
+   int maxSizeSlices(vector<int>& slices) {
+        int n=slices.size();
+        int t=(int)n/3;int i=0;
+        vector<int>case1(slices.begin(),slices.end()-1);
+        vector<vector<int>>dp1(n+1,vector<int>(t+1,-1));
+        int ans1=solve(case1,case1.size(),t,i,dp1);
+
+        vector<int>case2(slices.begin()+1,slices.end());
+        vector<vector<int>>dp2(n+1,vector<int>(t+1,-1));
+        int ans2=solve(case2,case2.size(),t,i,dp2);
+        return max(ans1,ans2);
+
+    }
+};
