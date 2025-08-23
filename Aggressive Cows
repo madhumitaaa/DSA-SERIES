@@ -1,0 +1,37 @@
+https://www.geeksforgeeks.org/problems/aggressive-cows/1
+
+class Solution {
+  public:
+    
+        bool canPlace(vector<int> &stalls, int k,int mid)
+        {
+            int count=1;
+            int lastpos=stalls[0];
+            for(int i=1;i<stalls.size();i++)
+            {
+                if(stalls[i]-lastpos>=mid){
+                    count++;
+                    lastpos=stalls[i];
+                }
+                if(count>=k)return true;
+            }
+            return false;
+        }
+int aggressiveCows(vector<int> &stalls, int k) {
+      // code here      
+    sort(stalls.begin(),stalls.end());
+    int low=1,high=stalls.back()-stalls.front();
+    int res=-1;
+    while(low<=high)
+    {
+        int mid=low+(high-low)/2;
+        if(canPlace(stalls,k,mid)){
+            res=mid;
+            low=mid+1;
+        }else{
+            high=mid-1;
+        }
+    }
+return res;
+    }
+};
