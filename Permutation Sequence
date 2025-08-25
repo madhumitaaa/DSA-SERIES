@@ -1,0 +1,27 @@
+https://leetcode.com/problems/permutation-sequence/submissions/1747835518/
+
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        vector<int>numbers;
+        int fact=1;
+        string result="";
+        for(int i=1;i<=n;i++)
+        {
+            numbers.push_back(i);
+            if(i<n)fact*=i;
+        }
+        k--;
+        for(int i=n;i>=1;i--)
+        {
+            int index=k/fact;
+            result+=to_string(numbers[index]);
+            numbers.erase(numbers.begin()+index);
+             k%=fact;
+            if(i>1)fact/=(i-1);
+           
+
+        }
+        return result;
+    }
+};
