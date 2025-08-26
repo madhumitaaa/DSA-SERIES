@@ -1,0 +1,50 @@
+https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+
+class Solution {
+  public:
+  
+  vector<int>parent;
+  int find(int s)
+  {
+      if(parent[s]==s)return s;
+      return parent[s]=find(parent[s]);
+      }
+  
+  vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+        // code here
+       int n=deadline.size();
+       vector<pair<int,int>>jobs;
+       for(int i=0;i<n;i++)
+       {
+           jobs.push_back({profit[i],deadline[i]});
+       }
+       sort(jobs.rbegin(),jobs.rend());
+       int maxDeadline=0;
+       for(auto &j:jobs){
+           maxDeadline=max(maxDeadline,j.second);
+       }
+       parent.resize(maxDeadline+1);
+       for(int i=0;i<=maxDeadline;i++)parent[i]=i;
+       
+       
+       int countjobs=0,totalprof=0;
+       for(auto &j:jobs){
+           int prof=j.first,dead=j.second;
+           int available=find(dead);
+           if(available>0)
+           {
+               countjobs++;
+               totalprof+=prof;
+               parent[available]=find(available-1);
+           }
+           
+       }
+          return {countjobs, totalprof};
+    }
+};
+
+
+
+
+
+
