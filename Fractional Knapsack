@@ -1,0 +1,36 @@
+https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1
+
+
+class Solution {
+  public:
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n=val.size();
+        vector<pair<double,pair<int,int>>>items;
+        for(int i=0;i<n;i++)
+        {
+            double ratio=(double)val[i]/wt[i];
+            items.push_back({ratio,{val[i],wt[i]}});
+            
+        }
+        sort(items.rbegin(),items.rend());
+        double profit=0.0;
+        int remainingcap=capacity;
+        for(auto &item:items){
+            int itemval=item.second.first;
+            int itemwt=item.second.second;
+              if(itemwt<=remainingcap)
+        {
+            profit+=itemval;
+            remainingcap-=itemwt;
+        }
+         else{
+             profit+=itemval*((double)remainingcap/itemwt);
+             break;
+         }
+        }
+      
+        
+        return profit;
+    }
+};
