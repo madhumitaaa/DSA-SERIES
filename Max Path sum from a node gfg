@@ -1,0 +1,42 @@
+https://www.geeksforgeeks.org/problems/maximum-path-sum-from-any-node/1
+
+// User Fuction template for C++
+/*
+// Tree Node
+class Node {
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+class Solution {
+  public:
+    // Function to return maximum path sum from any node in a tree.
+    
+int maxsum(Node* root, int &maxi){
+    if(root==NULL)return 0;
+    int left=max(0,maxsum(root->left,maxi));
+    int right=max(0,maxsum(root->right,maxi));
+    maxi=max(maxi,left+right+root->data);
+    return root->data+ max(left,right);
+}
+    
+    
+
+    
+    int findMaxSum(Node *root) {
+        // code here
+        int maxi=INT_MIN;
+        maxsum(root,maxi);
+        return maxi;
+    }
+};
+
+
+
