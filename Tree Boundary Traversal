@@ -1,0 +1,76 @@
+https://www.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1
+
+/*
+// Tree Node
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+*/
+
+
+
+
+class Solution {
+  public:
+ bool isleaf(Node* node){
+            return node && !node->left && !node->right;
+        }
+        
+void addL(Node *root,vector<int>&res){
+            Node* curr=root->left;
+            while(curr){
+                if(!isleaf(curr))res.push_back(curr->data);
+                if(curr->left)curr=curr->left;
+                else curr=curr->right;
+              }
+        
+        }
+        
+ void addR(Node *root,vector<int>&res){
+            Node* curr=root->right;
+            vector<int>temp;
+            while(curr){
+                if(!isleaf(curr))temp.push_back(curr->data);
+                if(curr->right)curr=curr->right;
+                else curr=curr->left;
+            }
+            reverse (temp.begin(),temp.end());
+            res.insert(res.end(),temp.begin(),temp.end());
+        }
+        
+void addleaves(Node *root,vector<int>&res){
+        
+        if(!root)return;
+        if(isleaf(root)){
+            res.push_back(root->data);
+            return;
+        }
+        addleaves(root->left,res);
+          addleaves(root->right,res);
+    }
+    
+     vector<int>boundaryTraversal(Node *root) {
+        
+        vector<int>res;
+        if(!root)return res;
+        if(!isleaf(root))res.push_back(root->data);
+        addL(root,res);
+        addleaves(root,res);
+        addR(root,res);
+        
+        
+        return res;
+    }
+    
+};
+  
