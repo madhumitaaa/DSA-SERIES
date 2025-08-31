@@ -1,0 +1,21 @@
+https://takeuforward.org/plus/dsa/problems/lower-bound-
+class Solution{
+public:
+    int lowerBound(vector<int> &nums, int x){
+        int left=0,right=nums.size()-1;
+        int n=nums.size();
+        int ans=n;
+        while(left<=right)
+        {
+            int mid=left+(right-left)/2;
+            if(nums[mid]>=x){
+                ans=mid;
+                right=mid-1;
+            }
+             if(nums[mid]<x)left=mid+1;
+            
+              
+        }
+    return ans;
+    }
+};
