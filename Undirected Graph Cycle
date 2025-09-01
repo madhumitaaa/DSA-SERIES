@@ -1,0 +1,38 @@
+https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+
+class Solution {
+  public:
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        // Code here
+        if(V==0)return false;
+        //convert edges list to adjacency list
+        vector<vector<int>>adj(V);
+        for(auto &e:edges){
+            int u=e[0],v=e[1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+         vector<int>vis(V,0);
+        
+        for(int s=0;s<V;s++)
+        {
+            if(vis[s])continue;
+            queue<pair<int,int>>q;
+            q.push({s,-1});
+            vis[s]=1;
+            while(!q.empty()){
+                auto[u,p]=q.front();q.pop();
+                for(int v:adj[u]){
+                    if(!vis[v]){
+                        vis[v]=1;
+                        q.push({v,u});
+                    }
+                    else if(v!=p){
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+};
