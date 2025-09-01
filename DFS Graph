@@ -1,0 +1,27 @@
+https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+
+class Solution {
+  public:
+  
+  
+  void dfsofg(int node,vector<vector<int>>& adj,vector<int>&vis,vector<int>&res){
+      vis[node]=1;
+      res.push_back(node);
+      for(int nei:adj[node]){
+          if(!vis[nei])dfsofg(nei,adj,vis,res);
+      }
+  }
+  
+  
+  
+  
+  
+  
+    vector<int> dfs(vector<vector<int>>& adj) {
+        // Code here
+        int v=adj.size();
+        vector<int>vis(v,0),res;
+        dfsofg(0,adj,vis,res);
+        return res;
+    }
+};
