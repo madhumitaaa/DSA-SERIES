@@ -1,0 +1,32 @@
+https://takeuforward.org/plus/dsa/problems/ninja's-training
+
+class Solution {
+public:
+
+
+int solve(vector<vector<int>>& matrix,vector<vector<int>>&dp,int day,int last)
+{
+    int n=matrix.size();
+    if(dp[day][last]!=-1) return dp[day][last];
+    int maxi=0;
+    for(int activity=0;activity<3;activity++)
+    {
+        if(activity!=last)
+        {
+            int points=matrix[day][activity]+solve(matrix,dp,day+1,activity);
+            maxi=max(maxi,points);
+        }
+    }
+    return dp[day][last]=maxi;
+    
+}
+
+
+
+    int ninjaTraining(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        //dp[i][j]will be representing total merit points achieved
+        vector<vector<int>>dp(n,vector<int>(4,-1));
+        return solve(matrix,dp,0,3);
+    }
+};
