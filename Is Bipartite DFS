@@ -1,0 +1,36 @@
+https://www.geeksforgeeks.org/problems/bipartite-graph/1
+
+class Solution {
+  public:
+  
+  bool dfs(int node,vector<vector<int>> &edges,vector<int>&color,int c)
+  {
+      color[node]=c;
+      for(int nei:edges[node]){
+          if(color[nei]==-1){
+              if(!dfs(nei,edges,color,1-c))return false;
+               
+          }
+          else if(color[nei]==c)return false;
+      }
+      return true;
+  }
+  
+  
+  
+
+    bool isBipartite(int V, vector<vector<int>> &edges) {
+        
+        // Code here
+        
+        vector<int>color(V,-1);
+        for(int i=0;i<V;i++)
+        {
+            if(color[i]==-1){
+                if(!dfs(i,edges,color,0))return false;
+                
+            }
+        }
+        return true;
+    }
+};
