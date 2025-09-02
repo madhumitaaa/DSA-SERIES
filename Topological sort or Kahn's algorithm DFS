@@ -1,0 +1,31 @@
+https://takeuforward.org/plus/dsa/problems/topological-sort-or-kahns-algorithm
+
+
+class Solution{
+public:
+
+void dfsTopo(int u,vector<int>adj[],vector<int>&vis,vector<int>&order)
+
+{
+    vis[u]=1;
+    for(int v:adj[u]){
+        if(!vis[v])dfsTopo(v,adj,vis,order);
+
+    }
+    order.push_back(u);
+}
+
+
+  vector<int> topoSort(int V, vector<int> adj[]){
+        vector<int>vis(V,0);
+        vector<int>order;
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])dfsTopo(u,adj,vis,order);
+        }
+        reverse(order.begin(),order.end());
+        return order;
+
+     
+    }
+};
