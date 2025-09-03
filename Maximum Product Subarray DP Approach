@@ -1,0 +1,18 @@
+https://leetcode.com/problems/maximum-product-subarray/submissions/1758683631/
+
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n= nums.size();
+      int currmax=nums[0], currmin=nums[0],ans=nums[0];
+      for(int i=1;i<n;i++)
+      {
+       int temp=currmax;
+       currmax=max(nums[i],max(nums[i]*currmax,nums[i]*currmin));
+       currmin=min(nums[i],min(nums[i]*temp,nums[i]*currmin));
+        ans=max(ans,currmax);
+      }
+      return ans;
+    }
+};
