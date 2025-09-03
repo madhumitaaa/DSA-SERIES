@@ -1,0 +1,34 @@
+https://takeuforward.org/plus/dsa/problems/subset-sum-equals-to-target
+
+class Solution{   
+public:
+    bool isSubsetSum(vector<int>arr, int target){
+        int n=arr.size();
+       vector<vector<bool>>dp(n,vector<bool>(target+1,false));
+
+       for(int i=0;i<n;i++)
+       {
+         dp[i][0]=true;//base case sum 0 is always possible 
+       }
+
+       //if first ele is less than or equal to target return true
+       if(arr[0]<=target)dp[0][arr[0]]=true;
+
+       //now for evey other element we have two choices either pick or not pick
+    for(int i=1;i<n;i++)
+    {
+        for(int t=0;t<=target;t++)
+        {
+            bool nottake=dp[i-1][t];
+            bool take=false;//we assume we cannot take the current element
+            if(arr[i]<=t)take=dp[i-1][t-arr[i]];//If we pick arr[i], then the remaining sum we need is t - arr[i]
+            //dp[i-1][t - arr[i]] tells us whether it’s possible to make that remaining sum using the previous numbers.
+            dp[i][t]=take||nottake;  
+        }
+    }
+    return dp[n-1][target];
+    
+    
+    
+    }
+};
