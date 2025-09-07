@@ -1,0 +1,30 @@
+https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1
+
+/*
+class Node {
+ public:
+    int data ;
+    Node *next ;
+
+    Node(int x) {
+        data = x ;
+        next = NULL ;
+    }
+};
+*/
+
+class Solution {
+  public:
+    Node* reverseList(Node* head) {
+        // code here
+        if(head==NULL||head->next==NULL)
+        {
+            return head;
+        }
+        Node* newhead=reverseList(head->next);
+        head->next->next=head;
+        head->next=NULL;
+         return newhead;
+    }
+   
+};
