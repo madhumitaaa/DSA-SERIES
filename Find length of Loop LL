@@ -1,0 +1,44 @@
+https://www.geeksforgeeks.org/problems/find-length-of-loop/1
+
+/*
+class Node {
+ public:
+    int data;
+    Node *next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    int lengthOfLoop(Node *head) {
+        // code here
+        Node *slow=head;
+        Node *fast=head;
+        
+        while(fast->next && fast->next->next)
+        {
+                slow=slow->next;
+                fast=fast->next->next;
+            
+                if(slow==fast)
+                {
+                  int len=1;
+                  Node *temp=slow->next;
+                  while(temp!=slow){
+                      len++;
+                      temp=temp->next;
+                  }
+                  return len;
+                }
+               
+        }
+         
+        return 0;
+        
+    }
+};
