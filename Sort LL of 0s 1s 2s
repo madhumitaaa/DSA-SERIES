@@ -1,0 +1,43 @@
+https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1
+
+
+/* Node is defined as
+  class Node {
+  public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+    Node* segregate(Node* head) {
+       if(!head || !head->next)return head;
+       Node zero(0),one(0),two(0);
+       Node *z=&zero;Node *o=&one;Node *t=&two;
+       Node * curr=head;
+       while(curr){
+           if(curr->data==0){
+               z->next=curr;
+               z=z->next;
+           }
+           if(curr->data==1){
+               o->next=curr;
+               o=o->next;
+           }
+           if(curr->data==2){
+               t->next=curr;
+               t=t->next;
+           }
+           curr=curr->next;
+       }
+       z->next=one.next?one.next:two.next;
+       o->next=two.next;
+       t->next=NULL;
+       return zero.next;
+    }
+};
