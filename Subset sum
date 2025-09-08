@@ -1,0 +1,34 @@
+https://takeuforward.org/plus/dsa/problems/subsets-i
+
+class Solution {
+  public:
+
+
+void helper(vector<int>& nums,int i,int sum,vector<int>&ans)
+{
+  if(i==nums.size()){
+     ans.push_back(sum);
+      return;
+  }
+ 
+  helper(nums,i+1,sum+nums[i],ans);
+  
+  helper(nums,i+1,sum,ans);
+
+}
+
+
+
+
+
+
+
+    vector<int> subsetSums(vector<int>& nums) {
+        //your code goes here
+        int n=nums.size();
+        int sum=0;
+        vector<int>ans;
+        helper(nums,0,0,ans);
+        return ans;
+    }
+};
