@@ -1,0 +1,30 @@
+https://leetcode.com/problems/combination-sum-iii/submissions/1764196841/
+
+class Solution {
+public:
+
+
+void helper(int k, int n,vector<int>&curr, vector<vector<int>>&ans,int m)
+{
+    if(curr.size()==k && n==0){
+        ans.push_back(curr);
+        return;
+    }
+    if(curr.size()>k||n<0)return;
+    for(int i=m;i<=9;i++)
+    {
+        curr.push_back(i);
+        helper(k,n-i,curr,ans,i+1);
+        curr.pop_back();
+    }
+    
+}
+
+
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int>curr;
+        vector<vector<int>>res;
+        helper(k,n,curr,res,1);
+        return res;
+    }
+};
