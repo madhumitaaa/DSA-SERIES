@@ -1,0 +1,22 @@
+https://takeuforward.org/plus/dsa/problems/check-if-there-exists-a-subsequence-with-sum-k
+
+class Solution{
+    public:
+bool helper(vector<int>& nums,int k, int i,int currsum){
+    if(i==nums.size()){
+       return currsum==k;
+    
+    }
+    if(helper(nums,k,i+1,currsum+nums[i]))return true;
+   if(helper(nums,k,i+1,currsum))return true;
+   return false;
+}
+
+
+    bool checkSubsequenceSum(vector<int>& nums, int k) {
+         //your code goes here
+         int currsum=0;
+         return helper(nums,k,0,0);
+
+    }
+};
