@@ -1,0 +1,30 @@
+https://takeuforward.org/plus/dsa/problems/reverse-a-stack
+
+class Solution {
+public:
+void helper(stack<int> &st,int num)
+{
+    if(st.empty()){
+        st.push(num);
+        return;
+        }
+        int t=st.top();
+        st.pop();
+        helper(st,num);
+        st.push(t);
+
+}
+
+
+
+
+    void reverseStack(stack<int> &st) {
+        // Your code goes here
+       if(st.empty())return;
+       int num=st.top();
+       st.pop();
+       reverseStack(st);
+       helper(st,num);
+      
+    }
+};
