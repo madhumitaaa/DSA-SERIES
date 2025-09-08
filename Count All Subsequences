@@ -1,0 +1,31 @@
+https://takeuforward.org/plus/dsa/problems/count-all-subsequences-with-sum-k
+
+class Solution{
+    public:  
+
+void helper(vector<int>& nums,int k,int currsum,int i,int &cnt){
+   
+    if(i==nums.size()){
+             if(currsum==k){
+             cnt++;
+      }
+      return ;
+    }
+    
+    helper(nums,k,currsum+nums[i],i+1,cnt);
+       
+    helper(nums,k,currsum,i+1,cnt);
+
+}
+
+
+    int countSubsequenceWithTargetSum(vector<int>& nums, int k){
+
+    	//your code goes here
+     
+        int cnt=0;
+        helper(nums,k,0,0,cnt);
+        return cnt;
+
+    }
+};
