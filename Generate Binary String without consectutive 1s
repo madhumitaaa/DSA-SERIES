@@ -1,0 +1,22 @@
+https://takeuforward.org/plus/dsa/problems/generate-binary-strings-without-consecutive-1s
+
+class Solution {
+public:
+
+void generatestrings(string s,int n,vector<string>&res)
+{
+    if((int)s.size()==n){
+        res.push_back(s);
+        return;
+    }
+    generatestrings(s+"0",n,res);
+    generatestrings(s+"1",n,res);
+}
+    vector<string>generateBinaryStrings(int n) {
+        // Your code goes here
+    
+      vector<string>res;
+      generatestrings("",n,res);
+       return res;
+}
+};
