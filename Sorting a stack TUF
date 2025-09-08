@@ -1,0 +1,32 @@
+https://takeuforward.org/plus/dsa/problems/sort-a-stack
+
+class Solution {
+public:
+
+
+void helper(stack<int> &st,int num)
+{
+    if(st.empty()||st.top()<num)
+    {
+        st.push(num);
+        return;
+    }
+    int top=st.top();
+    st.pop();
+    helper(st,num);
+    st.push(top);
+
+
+}
+
+
+
+    void sortStack(stack<int> &st) {
+        // Your code goes here
+        if(st.empty())return;
+        int num=st.top();
+        st.pop();
+        sortStack(st);
+        helper(st,num);
+    }
+};
