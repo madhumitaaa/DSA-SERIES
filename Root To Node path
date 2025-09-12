@@ -1,0 +1,33 @@
+https://takeuforward.org/plus/dsa/problems/print-root-to-note-path-in-bt
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
+class Solution{
+	public:
+
+void dfs(TreeNode* root,vector<int>&path,vector<vector<int>>&ans){
+    if(!root)return;
+    path.push_back(root->data);
+    if(!root->left && !root->right)ans.push_back(path);
+    if(root->left)dfs(root->left,path,ans);
+    if(root->right)dfs(root->right,path,ans);
+    path.pop_back();
+}
+
+
+		vector<vector<int>> allRootToLeaf(TreeNode* root) {
+            //your code goes here
+            vector<vector<int>>ans;
+            vector<int>path;
+            dfs(root,path,ans);
+            return ans;
+		}
+};
