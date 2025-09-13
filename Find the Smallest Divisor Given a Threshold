@@ -1,0 +1,33 @@
+https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/submissions/1769532116/
+
+class Solution {
+public:
+
+int checksum(vector<int>& nums,int mid){
+    int sum=0;
+    for(int i=0;i<nums.size();i++)
+    {
+            sum+=(nums[i]+mid-1)/mid;;
+    }
+    return sum;
+}
+
+int smallestDivisor(vector<int>& nums, int threshold) {
+        int left=1,right=*max_element(nums.begin(),nums.end());
+        int ans=right;
+
+        while(left<=right){
+        int mid=left+(right-left)/2;
+        int sum=checksum(nums,mid);
+        if(sum>threshold){
+            left=mid+1;;
+        }
+        else{
+            ans=mid;
+            right=mid-1;
+        }
+        
+}
+return ans;
+ }
+};
