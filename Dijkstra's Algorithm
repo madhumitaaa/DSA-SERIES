@@ -1,0 +1,23 @@
+https://takeuforward.org/plus/dsa/problems/dijkstra's-algorithm
+
+class Solution{
+public:
+    vector<int> dijkstra(int V, vector<vector<int>> adj[], int S) {
+        vector<int>dist(V,1e9);
+        dist[S]=0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        pq.push({0,S});
+        while(!pq.empty()){
+            auto [d,u]=pq.top();
+            pq.pop();
+            for(auto &edge:adj[u]){
+                int v=edge[0],w=edge[1];
+                if(d+w<dist[v]){
+                    dist[v]=d+w;
+                    pq.push({dist[v],v});
+                }
+            }
+        }
+        return dist;
+    }
+};
