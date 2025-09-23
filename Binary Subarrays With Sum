@@ -1,0 +1,20 @@
+https://leetcode.com/problems/binary-subarrays-with-sum/submissions/1780559543/
+
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        int n=nums.size();
+        unordered_map<int,int>mpp;
+        mpp[0]=1;
+        int prefix=0,count=0;
+        for(int i=0;i<n;i++)
+        {
+            prefix+=nums[i];
+            if(mpp.find(prefix-goal)!=mpp.end()){
+               count+=mpp[prefix-goal];
+            }
+            mpp[prefix]++;
+        }
+return count;
+    }
+};
