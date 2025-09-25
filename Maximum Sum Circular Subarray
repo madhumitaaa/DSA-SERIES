@@ -1,0 +1,26 @@
+https://leetcode.com/problems/maximum-sum-circular-subarray/submissions/1782608526/
+
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& nums) {
+
+int total=0;
+int currmax=0,maxsum=INT_MIN;
+int currmin=0,minsum=INT_MAX;
+for(int x:nums)
+{
+    total+=x;
+    currmax=max(currmax+x,x);
+    maxsum=max(maxsum,currmax);
+
+    currmin=min(currmin+x,x);
+    minsum=min(minsum,currmin);
+
+
+
+}
+    if(maxsum<0)return maxsum;
+return max(maxsum,total-minsum);
+
+    }
+};
