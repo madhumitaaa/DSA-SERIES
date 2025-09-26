@@ -1,0 +1,42 @@
+https://leetcode.com/problems/minimum-window-substring/submissions/1783231659/
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if(s.empty()||t.empty()||s.size()<t.size())return "";
+        unordered_map<char,int>need;
+        for(char &c:t)
+        {
+          need[c]++;
+        }
+        int needcount=need.size();
+        unordered_map<char,int>window;
+        int left=0,minlen=INT_MAX,have=0,start=0;
+        for(int right=0;right<s.size();right++)
+        {
+            char c=s[right];
+            window[c]++;
+            if(need.count(c)&&window[c]==need[c])
+            {
+                have++;
+            }
+            while(have==needcount)
+            {
+                if(right-left+1<minlen)
+                  {
+                     minlen=right-left+1;
+                     start=left;
+                  }
+                   char d=s[left];
+            window[d]--;
+            if(need.count(d)&&window[d]<need[d]){
+                have--;
+            }
+                left++;
+            }
+
+             }
+        
+        return minlen==INT_MAX?"":s.substr(start,minlen);
+    }
+};
