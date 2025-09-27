@@ -1,0 +1,28 @@
+https://leetcode.com/problems/permutation-in-string/
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int n=s1.size(),m=s2.size();
+        unordered_map<char,int>need,window;
+        for(char &c:s1)
+        {
+            need[c]++;
+        }
+        int l=0;
+        for(int r=0;r<m;r++)
+        {
+            window[s2[r]]++;
+            if(r-l+1>n){
+                window[s2[l]]--;
+                if(window[s2[l]]==0)window.erase(s2[l]);
+                l++;
+            }
+            if(r-l+1==n)
+            {
+                if(window==need)return true;
+            }
+        }
+        return false;
+    }
+};
