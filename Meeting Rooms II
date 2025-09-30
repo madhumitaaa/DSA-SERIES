@@ -1,0 +1,26 @@
+https://www.geeksforgeeks.org/problems/attend-all-meetings-ii/1
+
+class Solution {
+  public:
+    int minMeetingRooms(vector<int> &start, vector<int> &end) {
+        // code here
+      sort(start.begin(),start.end());
+      sort(end.begin(),end.end());
+      int i=0,j=0;
+      int n=start.size(),rooms=0,maxroom=0;
+      while(i<n && j<n)
+      {
+          if(start[i]<end[j])
+          {
+              rooms++;
+              maxroom=max(maxroom,rooms);
+              i++;
+          }
+          else{
+              rooms--;
+              j++;
+          }
+      }
+      return maxroom;
+    }
+};
