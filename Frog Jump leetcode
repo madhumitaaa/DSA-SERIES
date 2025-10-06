@@ -1,0 +1,34 @@
+https://leetcode.com/problems/frog-jump/
+
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int n=stones.size();
+        unordered_map<int,int>posttoindex;
+        for(int i=0;i<n;i++)posttoindex[stones[i]]=i;
+        vector<vector<bool>>dp(n,vector<bool>(n,0));
+        dp[0][0]=true;
+        for(int i=0;i<n;i++)
+        {
+            for(int k=0;k<n;k++)
+            {
+                if(!dp[i][k])continue;
+            for(int nextjump=k-1;nextjump<=k+1;nextjump++)
+            {
+                if(nextjump<=0)continue;
+                    int nextpos=stones[i]+nextjump;
+                    if(posttoindex.count(nextpos)){
+                        int nextindex=posttoindex[nextpos];
+                        dp[nextindex][nextjump]=true;
+                    }
+            }
+            }
+        }
+        
+for(int k=0;k<n;k++)
+{
+    if(dp[n-1][k])return true;
+}
+return false;
+    }
+};
