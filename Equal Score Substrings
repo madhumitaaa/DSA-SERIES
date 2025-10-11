@@ -1,0 +1,22 @@
+https://leetcode.com/contest/biweekly-contest-167/problems/equal-score-substrings/
+
+class Solution {
+public:
+    bool scoreBalance(string s) {
+        int n=s.size();
+         int leftsum=0;
+        int total=0;
+      for (char c:s)
+          {
+                  total+=c-'a'+1;
+          }
+        for(int i=0;i<n-1;i++)
+            {
+               leftsum+=s[i]-'a'+1;
+                 if(2*leftsum==total)return true;
+            }
+           return false;
+        
+    }
+
+};©leetcode
