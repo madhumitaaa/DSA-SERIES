@@ -1,0 +1,43 @@
+https://www.geeksforgeeks.org/problems/is-it-a-tree/1
+
+
+class Solution {
+  public:
+    int isTree(int n, int m, vector<vector<int>> &adj) {
+        // code here
+        if(m!=n-1)return 0;
+        vector<int>vis(n,0);
+        vector<vector<int>> graph(n);
+for(auto &edge : adj) {
+    int u = edge[0], v = edge[1];
+    graph[u].push_back(v);
+    graph[v].push_back(u);  
+}
+
+        
+        queue<pair<int,int>>q;
+        q.push({0,-1});
+        vis[0]=1;
+        while(!q.empty())
+        {
+            auto[u,p]=q.front();
+            q.pop();
+            for(int v:graph[u])
+            {
+                
+                if(!vis[v]){
+                    vis[v]=1;
+                q.push({v,u});
+                }
+                 else if(v!=p)return 0;
+            }
+        }
+        
+        for(int s=0;s<n;s++)
+        {
+            if(!vis[s])return 0;
+        }
+        
+        return 1;
+    }
+};
