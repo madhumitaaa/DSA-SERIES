@@ -1,0 +1,19 @@
+https://leetcode.com/problems/majority-element/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        unordered_map<int,int>hash;
+        for (int i:nums)
+        {
+            hash[i]++;
+        }
+        int ans=0;
+        for(auto &it:hash)
+        {
+            if(it.second>(n/2))ans=it.first;
+        }
+        return ans;
+    }
+};
