@@ -8,6 +8,7 @@ public:
         {
             return -1;
         }
+
         if(n==1)return 1;
         vector<pair<int,int>>directions={
             {1,0},{-1,0},{0,1},{0,-1},
