@@ -75,13 +75,5 @@ This is a personal learning repository, but if you find any optimization, feel f
 ### 📎 Connect & Explore
 - 🌐 [LeetCode Profile](https://leetcode.com/u/madhuuuuuuu/)
 - 💚 [GeeksforGeeks Profile](https://www.geeksforgeeks.org/user/madhumitam0ca8/)
----
-
-### 🏆 Progress Overview (Example)
-| Category | Problems Solved | Source |
-|-----------|------------------|---------|
-| Arrays | ✅ 15 | Striver + LeetCode |
-| Graphs | ✅ 10 | LeetCode + GFG |
-| Dynamic Programming | 🔄 In Progress | Striver |
-| Total | 💯 300+ | Across All Sheets |
+--- |
 
