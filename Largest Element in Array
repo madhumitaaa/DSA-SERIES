@@ -1,0 +1,11 @@
+https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1
+
+class Solution {
+  public:
+    int largest(vector<int> &arr) {
+        // code here
+        sort(arr.begin(),arr.end());
+        int n=arr.size()-1;
+        return arr[n];
+    }
+};
