@@ -1,0 +1,19 @@
+https://leetcode.com/problems/find-all-duplicates-in-an-array/submissions/1804491087/
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        unordered_map<int,int>mpp;
+        int maxelem=*max_element(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();i++)
+        {
+           if(nums[i]>=1&&nums[i]<=maxelem) mpp[nums[i]]++;
+        }
+        vector<int>ans;
+        for(auto &[c,count]:mpp)
+        {
+            if(count>1)ans.push_back(c);
+        }
+        return ans;
+    }
+};
