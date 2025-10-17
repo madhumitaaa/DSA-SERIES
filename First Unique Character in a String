@@ -1,0 +1,17 @@
+https://leetcode.com/problems/first-unique-character-in-a-string/submissions/1804520622/
+
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map<char,int>mpp;
+        for(char i:s)
+        {
+                mpp[i]++;
+        }
+        for(int m=0;m<s.size();m++)
+        {
+            if(mpp[s[m]]==1)return m;
+        }
+return -1;
+    }
+};
