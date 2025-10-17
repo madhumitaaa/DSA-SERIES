@@ -1,0 +1,20 @@
+https://www.geeksforgeeks.org/problems/non-repeating-element3958/1
+
+
+
+class Solution {
+  public:
+    int firstNonRepeating(vector<int>& arr) {
+        // Complete the function
+        unordered_map<int,int>mpp;
+        for(int i:arr)
+        {
+            mpp[i]++;
+        }
+        for(int num:arr)
+        {
+            if(mpp[num]==1)return num;
+        }
+        return 0;
+    }
+};
