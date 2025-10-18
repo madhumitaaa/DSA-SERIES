@@ -1,0 +1,60 @@
+https://leetcode.com/problems/reverse-linked-list-ii/submissions/1805205193/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+
+
+    ListNode* findkth(ListNode* head,int k)
+    {
+        k-=1;
+        while(head!=NULL && k>0)
+        {
+            head=head->next;
+            k--;
+        }
+        return head;
+    }
+
+    ListNode* reverseLL(ListNode* head)
+    {
+        if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+        ListNode* newNode=reverseLL(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return newNode;
+    }
+
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+     if(left==right)return head;
+     ListNode* prev=NULL;
+     ListNode* start=head;
+     if(left>1)
+     {
+        prev=findkth(head,left-1);
+        start=prev->next;
+     }
+     ListNode* end=findkth(head,right);
+     ListNode* nextNode=end->next;
+     end->next=NULL;
+     ListNode* newHead=reverseLL(start);
+     if(prev)prev->next=end;
+     else head=newHead;
+     start->next=nextNode;
+     return head;
+
+
+    }
+};
