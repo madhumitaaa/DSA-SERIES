@@ -66,12 +66,6 @@ This is a personal learning repository, but if you find any optimization, feel f
 
 ---
 
-## 💫 Keep Growing
-> “Consistency beats intensity — one problem at a time.” 💪  
-⭐ If you find this repo helpful, **don’t forget to star it!**
-
----
-
 ### 📎 Connect & Explore
 - 🌐 [LeetCode Profile](https://leetcode.com/u/madhuuuuuuu/)
 - 💚 [GeeksforGeeks Profile](https://www.geeksforgeeks.org/user/madhumitam0ca8/)
