@@ -1,0 +1,25 @@
+https://leetcode.com/problems/happy-number/submissions/1804975003/
+
+
+class Solution {
+public:
+    bool isHappy(int n) {
+        unordered_map<int,bool>seen;
+          int sum=0;
+        while(n!=1)
+        {
+            if(seen[n])return false;
+            seen[n]=true;
+              int sum=0;
+            int temp=n;
+            while(temp!=0){
+            int rem=temp%10;
+            sum+=rem*rem;
+            temp=temp/10;
+            n=sum;
+            }
+        }
+         return true;;
+    }
+   
+};
