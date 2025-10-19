@@ -24,7 +24,6 @@ Each file contains:
 - ✅ Clean & efficient code solution  
 - 🧠 Problem explanation (where needed)  
 - 🔗 Link to the original problem  
-- 💬 Comments explaining logic & approach  
 
 ---
 
@@ -43,28 +42,6 @@ This series covers **all major DSA topics**, including:
 
 ---
 
-## 🌟 Goal
-The goal of this repository is to:
-- Strengthen problem-solving skills  
-- Master core algorithms and patterns  
-- Prepare efficiently for coding interviews at top product-based companies  
-
----
-
-## 🧑‍💻 Author
-**👩‍💻 Madhumita**  
-💬 Passionate about DSA, full-stack development, and building scalable solutions.  
-📍 On a journey to master problem-solving and crack top tech roles.
-
----
-
-## 🤝 Contributions
-This is a personal learning repository, but if you find any optimization, feel free to:
-1. Fork the repo  
-2. Create your branch  
-3. Submit a PR with a short explanation  
-
----
 
 ### 📎 Connect & Explore
 - 🌐 [LeetCode Profile](https://leetcode.com/u/madhuuuuuuu/)
