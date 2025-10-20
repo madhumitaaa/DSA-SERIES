@@ -1,0 +1,26 @@
+https://leetcode.com/problems/longest-palindromic-subsequence/submissions/1807061670/
+
+class Solution {
+public:
+    int solve(const string &s, vector<vector<int>>&dp, int left, int right) {
+        if(left>right)return 0;
+        if(left==right)return 1;
+        if(dp[left][right]!=-1)return dp[left][right];
+        int ans=0;
+            if (s[left] == s[right])
+                ans=2 + solve(s, dp, left + 1, right - 1);
+            else {
+                ans = max(solve(s, dp, left + 1, right),
+                            solve(s, dp, left, right - 1));
+            }
+          
+        
+        return dp[left][right]=ans;
+    }
+
+    int longestPalindromeSubseq(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n , vector<int>(n,-1));
+        return solve(s, dp, 0, n - 1);
+    }
+};
