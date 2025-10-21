@@ -1,0 +1,38 @@
+https://leetcode.com/problems/palindrome-partitioning-ii/submissions/1807526768/
+
+class Solution {
+public:
+    int minCut(string s) {
+        int n=s.size();
+        vector<int>dp(n,0);
+        for(int i=0;i<n;i++)
+        {
+            dp[i]=i;
+        }
+        for(int center=0;center<n;center++)
+        {
+            expandandupdate(s,center,center,dp);
+            expandandupdate(s,center,center+1,dp);
+        }
+return dp[n-1];
+    }
+
+private:
+
+void expandandupdate(string &s,int left,int right,vector<int>&dp)
+{
+        int n=s.size();
+        while(left>=0 && right<n && s[left]==s[right])
+        {
+            if(left==0){
+                dp[right]=0;
+          
+            }
+            else  dp[right]=min(dp[right],dp[left-1]+1);
+            
+                left--;
+                right++;
+            
+        }
+}
+};
