@@ -1,0 +1,20 @@
+https://leetcode.com/contest/weekly-contest-472/problems/smallest-missing-multiple-of-k/
+
+
+class Solution {
+public:
+    int missingMultiple(vector<int>& nums, int k) {
+        unordered_set<int>s(nums.begin(),nums.end());
+       for(int i=1;i<=200;i++)
+           {
+               int m=k*i;
+               if(s.find(m)==s.end())return m;
+        
+           }
+        return -1;
+        
+
+    }
+
+
+};©leetcode
