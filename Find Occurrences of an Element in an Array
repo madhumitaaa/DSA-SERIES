@@ -1,0 +1,23 @@
+https://leetcode.com/problems/find-occurrences-of-an-element-in-an-array/submissions/1810672901/
+
+
+class Solution {
+public:
+    vector<int> occurrencesOfElement(vector<int>& nums, vector<int>& queries, int x) {
+        vector<int>occurenceofx,answer;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]==x)occurenceofx.push_back(i);
+        }
+        for(int k:queries)
+        {
+            if(k<=occurenceofx.size())
+            {
+            answer.push_back(occurenceofx[k-1]);
+            }
+            else answer.push_back(-1);
+        }
+        return answer;
+    }
+};
