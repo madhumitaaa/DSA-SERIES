@@ -1,0 +1,16 @@
+https://leetcode.com/contest/weekly-contest-473/problems/remove-zeros-in-decimal-representation/submissions/1812378080/
+
+class Solution {
+public:
+    long long removeZeros(long long n) {
+        string s;
+        while(n!=0)
+            {
+                int rem=n%10;
+                if(rem!=0)s+=rem+'0';
+                n=n/10;
+            }
+        reverse(s.begin(),s.end());
+        return stoll(s.empty()?"0":s);
+    }
+};©leetcode
