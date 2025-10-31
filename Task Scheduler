@@ -1,0 +1,29 @@
+https://leetcode.com/problems/task-scheduler/
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        int m=tasks.size();
+        unordered_map<char,int>mp;
+        for(int i=0;i<m;i++)
+        {
+            mp[tasks[i]]++;
+        }
+        int maxfreq=0;
+        for(auto &p:mp)
+        {
+            maxfreq=max(maxfreq,p.second);
+
+        }
+        int countmax=0;
+        for(auto &p:mp)
+        {
+            if(p.second==maxfreq)countmax++;
+        }
+        int partcount=maxfreq-1;
+        int empty=partcount*(n-(countmax-1));
+        int avail=m-maxfreq*countmax;
+        int idles=max(0,empty-avail);
+        return tasks.size()+idles;
+    }
+};
