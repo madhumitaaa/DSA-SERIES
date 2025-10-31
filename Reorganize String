@@ -1,0 +1,51 @@
+https://leetcode.com/problems/reorganize-string/description/
+
+class Solution {
+public:
+    string reorganizeString(string s) {
+        int n=s.size();
+        unordered_map<char,int>mp;
+        for(int i=0;i<n;i++)
+        {
+            mp[s[i]]++;
+        }
+  
+        int i=0;
+        int maxfreq=0;
+        char maxchar;
+        for(auto &m:mp)
+        {
+            if(m.second>maxfreq)
+            {
+                maxfreq=m.second;
+                maxchar=m.first;
+            }
+            
+        }
+        if(maxfreq>(n+1)/2)return "";
+        string res(n,' ');
+        int idx=0;
+        while(mp[maxchar]>0)
+        {
+            res[idx]=maxchar;
+            idx+=2;
+            mp[maxchar]--;
+        }
+        for(auto &p:mp)
+        {
+            char ch=p.first;
+            int f=p.second;
+   
+            while(f>0)
+            {
+            if(idx>=n)idx=1;
+            res[idx]=ch;
+            idx+=2;
+            f--;
+            }
+
+        }
+    return res;
+
+    }
+};
