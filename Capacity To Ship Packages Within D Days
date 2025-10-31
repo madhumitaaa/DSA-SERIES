@@ -1,0 +1,35 @@
+https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/submissions/1816746782/
+
+#include<bits/stdc++.h>
+class Solution {
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n= weights.size();
+        int low=*max_element(weights.begin(),weights.end());
+        int high=accumulate(weights.begin(),weights.end(),0);
+        int ans=high;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(canship(weights,mid,days)){
+                ans=mid;
+                high=mid-1;
+            }
+            else low=mid+1;
+         }
+         return ans;
+    }
+    bool canship(vector<int>& weights,int mid, int days)
+    {
+        int day=1,currload=0;
+        for( int w:weights)
+        {
+            if(currload+w>mid){
+                day++;
+                currload=0;
+            }
+            currload+=w;
+        }
+        return day<=days;
+    }
+};
