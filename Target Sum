@@ -1,0 +1,36 @@
+https://leetcode.com/problems/target-sum/submissions/1820964388/
+
+
+class Solution {
+public:
+
+int solve(vector<int>& nums, int subsetsum,vector<vector<int>>&dp,int index)
+{
+        if(index==0)
+        {
+            if(subsetsum==0&&nums[index]==0)return 2;
+            if(subsetsum==0 || subsetsum==nums[index])return 1;
+            return 0;
+        }
+        int n=nums.size();
+
+        if(dp[index][subsetsum]!=-1)return dp[index][subsetsum];
+
+        int notpick=solve(nums,subsetsum,dp,index-1);
+        int pick=0;
+        if(subsetsum>=nums[index]){
+        pick=solve(nums,subsetsum-nums[index],dp,index-1);
+        }
+        return dp[index][subsetsum]=pick+notpick;
+}
+
+
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int n=nums.size();
+        int total=accumulate(nums.begin(),nums.end(),0);
+        if((total+target)%2!=0||total<abs(target))return 0;
+        int subsetsum=(total+target)/2;
+        vector<vector<int>>dp(n,vector<int>(subsetsum+1,-1));
+        return solve(nums,subsetsum,dp,n-1);
+    }
+};
