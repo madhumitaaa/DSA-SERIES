@@ -1,0 +1,22 @@
+https://takeuforward.org/plus/dsa/problems/second-largest-element
+
+
+class Solution {
+public:
+    int secondLargestElement(vector<int>& nums) {
+        //your code goes here
+        
+        int n=nums.size();
+        if(n<2)return -1;
+      int maxi=*max_element(nums.begin(),nums.end());
+      int sec=INT_MIN;
+      for(int i=0;i<n;i++)
+      {
+        if(nums[i]!=maxi )
+        {
+            sec=max(sec,nums[i]);
+        }
+      }
+      return sec==INT_MIN?-1:sec;
+    }
+};
