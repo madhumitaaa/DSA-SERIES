@@ -1,0 +1,32 @@
+https://leetcode.com/contest/weekly-contest-475/problems/minimum-distance-between-three-equal-elements-ii/description/
+
+class Solution {
+public:
+    int minimumDistance(vector<int>& nums) {
+         int n=nums.size();
+        int ans=INT_MAX;
+        unordered_map<int,vector<int>>mpp;
+        for(int i=0;i<n;i++)
+            {
+                
+                            mpp[nums[i]].push_back(i);
+            }
+        for(auto &p:mpp)
+            {
+                sort(p.second.begin(),p.second.end());
+            }
+        for(auto &m:mpp)
+            {
+               vector<int>&v=m.second;
+                if(v.size()>=3)
+                    {
+                    for( int i=0;i+2<v.size();i++)
+                        {
+                            int dist=2*abs(v[i+2]-v[i]);
+                            ans=min(ans,dist);
+                        }
+                    }
+            }
+return ans==INT_MAX?-1:ans;
+    }
+};
