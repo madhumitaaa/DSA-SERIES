@@ -1,0 +1,23 @@
+https://www.geeksforgeeks.org/problems/maximize-number-of-1s0905/1
+
+
+class Solution {
+  public:
+    int maxOnes(vector<int>& arr, int k) {
+        // code here
+        int n=arr.size();
+        int r=0,l=0,maxlen=0,zeroes=0;
+        while(r<n)
+        {
+           if(arr[r]==0) zeroes++;
+            while(zeroes>k)
+            {
+               if(arr[l]==0) zeroes--;
+                l++;
+            }
+            maxlen=max(r-l+1,maxlen);
+            r++;
+        }
+        return maxlen;
+    }
+};
