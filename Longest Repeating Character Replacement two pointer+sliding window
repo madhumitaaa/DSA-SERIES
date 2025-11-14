@@ -1,0 +1,25 @@
+https://leetcode.com/problems/longest-repeating-character-replacement/submissions/1829552327/
+
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int n=s.size();
+        unordered_map<char,int>mpp;
+        int l=0,r=0,maxfreq=0,ans=0;
+        while(r<n)
+        {
+            mpp[s[r]]++;
+            maxfreq=max(maxfreq,mpp[s[r]]);
+           
+            while((r-l+1)-maxfreq>k)
+            {
+                mpp[s[l]]--;
+                l++;
+            }
+           ans=max(ans,r-l+1);
+           r++;
+        }
+        return ans;
+    }
+};
