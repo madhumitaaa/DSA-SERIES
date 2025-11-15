@@ -1,0 +1,54 @@
+https://leetcode.com/problems/number-of-operations-to-make-network-connected/
+
+class Solution {
+public:
+vector<int>parent,size;
+
+int findP(int node)
+{
+    if(parent[node]==node)return node;
+    return parent[node]=findP(parent[node]);
+}
+
+void unionBysize(int u,int v)
+{
+    int du=findP(u);
+    int dv=findP(v);
+    if(du==dv)return ;
+    if(size[du]<size[dv])
+    {
+        parent[du]=dv;
+        size[dv]+=size[du];
+    }
+    else{
+        parent[dv]=du;
+        size[du]+=size[dv];
+    }
+}
+
+ int makeConnected(int n, vector<vector<int>>& connections) {
+        int m=connections.size();
+        if(connections.size()<n-1)return -1;
+        unordered_set<int>mpp;
+        parent.resize(n);
+        size.resize(n,1);
+        for(int i=0;i<n;i++)
+        {
+            parent[i]=i;
+        }
+        for(auto &e:connections)
+        {
+            int u=e[0];
+            int v=e[1];
+            unionBysize(u,v);
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+                mpp.insert(findP(i));
+        }
+
+
+return mpp.size()-1;
+    }
+};
