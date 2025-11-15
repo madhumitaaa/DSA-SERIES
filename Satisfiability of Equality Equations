@@ -1,0 +1,53 @@
+https://leetcode.com/problems/satisfiability-of-equality-equations/submissions/1830550813/
+
+class Solution {
+public:
+vector<int>parent,size;
+
+    int findP(int node)
+    {
+        if(parent[node]==node)return node;
+        return parent[node]=findP(parent[node]);
+    }
+
+    
+    void unionBysize(int u,int v)
+    {
+        int du=findP(u);
+        int dv=findP(v);
+        if(du==dv)return;
+        if(size[du]<size[dv])
+        {
+            parent[du]=dv;
+            size[dv]+=size[du];
+        }
+        else{
+            parent[dv]=du;
+            size[du]+=size[dv];
+        }
+
+    }
+
+
+    bool equationsPossible(vector<string>& equations) {
+        int n=equations.size();
+        parent.resize(26);
+        size.resize(26,1);
+        for(int i=0;i<26;i++)
+        {
+            parent[i]=i;
+        }
+        for(auto &eq:equations)
+        {
+            if(eq[1]=='=')unionBysize(eq[0]-'a',eq[3]-'a');
+        }
+        for(auto &eq:equations)
+        {
+            if(eq[1]=='!')
+            {
+               if(findP(eq[0]-'a')==findP(eq[3]-'a'))return false;
+            }
+        }
+return true;
+    }
+};
