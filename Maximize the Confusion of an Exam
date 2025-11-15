@@ -1,0 +1,23 @@
+https://leetcode.com/problems/maximize-the-confusion-of-an-exam/submissions/1830021187/
+
+class Solution {
+public:
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        int n=answerKey.size();
+        unordered_map<char,int>mpp;
+        int l=0,r=0,maxsize=0,sum=0;
+        while(r<n)
+        {
+            mpp[answerKey[r]]++;
+            int maxfreq=max(mpp['T'],mpp['F']);
+            while((r-l+1)-maxfreq>k)
+            {
+                mpp[answerKey[l]]--;
+                l++;
+            }
+            maxsize=max(maxsize,r-l+1);
+            r++;
+        }
+        return maxsize;
+    }
+};
