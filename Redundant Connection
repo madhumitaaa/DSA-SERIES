@@ -1,0 +1,42 @@
+https://leetcode.com/problems/redundant-connection/submissions/1830263407/
+
+class Solution {
+public:
+vector<int>parent,size;
+
+    int findUpar(int node)
+    {
+        if(parent[node]==node)return node;
+        return parent[node]=findUpar(parent[node]);
+    }
+    void unionBysize(int u,int v)
+    {
+        int pu=findUpar(u);
+        int pv=findUpar(v);
+        if(pu==pv)return;
+        if(size[pu]<size[pv]){
+            parent[pu]=pv;
+            size[pv]+=size[pu];
+        }
+        else{
+            parent[pv]=pu;
+            size[pu]+=size[pv];
+        }
+    }
+
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n=edges.size();
+       parent.resize(n+1);
+       size.resize(n+1,1);
+       for(int i=1;i<=n;i++)parent[i]=i;
+       for(auto &e:edges)
+       {
+            int u=e[0];
+            int v=e[1];
+            if(findUpar(u)==findUpar(v))return e;
+            unionBysize(u,v);
+
+       }
+return {};
+    }
+};
