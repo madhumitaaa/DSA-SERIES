@@ -1,0 +1,56 @@
+https://leetcode.com/problems/number-of-provinces/
+
+class Solution {
+public:
+vector<int>parent,size;
+
+    int findUPar(int node)
+    {
+        if(parent[node]==node)
+        {
+            return node;
+        }
+        return parent[node]=findUPar(parent[node]);
+    }
+
+    void unionBysize(int u,int v)
+    {
+        int pu=findUPar(u);
+        int pv=findUPar(v);
+        if(pu==pv)return;
+        if(size[pu]<size[pv])
+        {
+            parent[pu]=pv;
+            size[pv]+=size[pu];
+        }else{
+            parent[pv]=pu;
+            size[pu]+=size[pv];
+        }
+    }
+
+
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n=isConnected.size();
+        parent.resize(n);
+        size.resize(n,1);
+        for(int i=0;i<n;i++)
+        {
+            parent[i]=i;
+
+        }
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(isConnected[i][j]==1)unionBysize(i,j);
+            }
+        }
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(findUPar(i)==i)count++;
+            
+        }
+return count;
+    }
+};
