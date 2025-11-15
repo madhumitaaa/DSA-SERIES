@@ -1,0 +1,53 @@
+https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/
+
+class Solution {
+public:
+vector<int>parent,size;
+const int OFFSET=10001;
+
+int findP(int node)
+{
+    if(parent[node]==node)return node;
+    else return parent[node]=findP(parent[node]);
+}
+
+void unionBysize(int u,int v)
+{
+    int du=findP(u);
+    int dv=findP(v);
+    if(du==dv)return;
+    if(size[du]<size[dv]){
+        parent[du]=dv;
+        size[dv]+=size[du];
+    }
+    else{
+        parent[dv]=du;
+        size[du]+=size[dv];
+    }
+}
+
+    int removeStones(vector<vector<int>>& stones) {
+        int n=stones.size();
+        parent.resize(2*OFFSET);
+        size.resize(2*OFFSET,1);
+        unordered_set<int>uniqueRoots;
+      
+        for(int i=0;i<2*OFFSET;i++)
+        {
+            parent[i]=i;
+        }
+        for(auto &stone:stones)
+        {
+            int u=stone[0];
+            int v=stone[1]+OFFSET;
+            unionBysize(u,v);
+        }
+          for(auto &stone:stones)
+        {
+            int root=findP(stone[0]);
+            uniqueRoots.insert(root);
+        }
+        
+return n-uniqueRoots.size();
+    }
+};
