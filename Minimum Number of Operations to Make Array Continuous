@@ -1,0 +1,23 @@
+https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/
+
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        nums.erase(unique(nums.begin(),nums.end()),nums.end());
+        int l=0,r=0,maxi=0,sum=0;
+        int m=nums.size();
+        while(r<m)
+        {
+            
+              while(nums[r]-nums[l]>n-1)
+              {
+                l++;
+              }
+              maxi=max(maxi,r-l+1);
+              r++;
+        }
+        return n- maxi;
+    }
+};
