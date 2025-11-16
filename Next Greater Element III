@@ -1,0 +1,15 @@
+https://leetcode.com/problems/next-greater-element-iii/submissions/1831747374/
+
+class Solution {
+public:
+    int nextGreaterElement(int n) {
+        string s=to_string(n);
+        if(next_permutation(s.begin(),s.end())){
+            long long val=stoll(s);
+            if(val>INT_MAX)return -1;
+            return val;
+        }
+
+return -1;
+    }
+};
