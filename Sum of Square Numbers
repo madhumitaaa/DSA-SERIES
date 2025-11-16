@@ -1,0 +1,19 @@
+https://leetcode.com/problems/sum-of-square-numbers/submissions/1831217580/
+
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        
+        if(c<=2)return true;
+        
+        long long l=0,r=sqrt(c);
+        while(l<=r)
+        {
+           long long sum=(l*l)+(r*r);
+            if(sum<c)l++;
+             else if(sum>c)r--;
+             else if(sum==c)return true;
+        }
+        return false;
+    }
+};
