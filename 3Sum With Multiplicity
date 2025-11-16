@@ -1,0 +1,59 @@
+https://leetcode.com/problems/3sum-with-multiplicity/submissions/1831428768/
+
+class Solution {
+public:
+const int MOD=1e9+7;
+    int threeSumMulti(vector<int>& arr, int target) {
+        int n=arr.size();
+        unordered_map<int,int>mpp;
+        for(int i=0;i<n;i++)
+        {
+                mpp[arr[i]]++;
+        }
+     vector<int>keys;
+     for(auto &m:mpp)
+     {
+        keys.push_back(m.first);
+     }
+     sort(keys.begin(),keys.end());
+     long long ans=0;
+     for(int i=0;i<keys.size();i++)
+     {
+            int l=i,r=keys.size()-1;
+            int x=keys[i];
+            while(l<=r)
+            {
+               
+                int y=keys[l],z=keys[r];
+                long long sum=x+y+z;
+                if(sum==target){
+                    long long a=mpp[keys[i]];
+                    long long b=mpp[keys[l]];
+                    long long c=mpp[keys[r]];
+                    if(x<y && y<z){
+                        ans+=a*b*c;
+                    }
+                    else if(x==y && y<z){
+                        ans+=a*(a-1)/2*c;
+                    }
+                    else if(x<y && y==z){
+                        ans+=a*(b*(b-1)/2);
+                    }
+                    else if(x==y && y==z)
+                    {
+                        ans+=a*(a-1)*(a-2)/6;
+                    }
+                    ans%=MOD;
+                    l++;
+                    r--;
+
+                }
+                else if(sum<target)l++;
+                else if(sum>target)r--;
+
+            }
+     }
+     return ans;
+
+    }
+};
