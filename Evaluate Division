@@ -1,0 +1,65 @@
+https://leetcode.com/problems/evaluate-division/description/
+
+class Solution {
+public:
+unordered_map<string,string>parent;
+unordered_map<string,double>weight;
+
+string findP(string x){
+    if(parent[x]!=x){
+        string orgp=parent[x];
+        parent[x]=findP(parent[x]);
+        weight[x]*=weight[orgp];
+    }
+    return parent[x];
+}
+
+
+void UnionF(string a,string b,double value)
+{
+    string pa=findP(a);
+    string pb=findP(b);
+    if(pa!=pb)
+    {
+       parent[pa]=pb;
+       weight[pa]=value*weight[b]/weight[a];
+    }
+}
+
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        int n=equations.size();
+        int m=values.size();
+        int k=queries.size();
+        int i=0;
+        for(int i=0;i<equations.size();i++)
+        {
+            string a=equations[i][0];
+            string b=equations[i][1];
+            double value=values[i];
+            if(parent.find(a)==parent.end()){
+                parent[a]=a;
+                weight[a]=1.0;
+            }
+            if(parent.find(b)==parent.end()){
+                parent[b]=b;
+                weight[b]=1.0;
+            }
+            UnionF(a,b,value);
+        }
+        vector<double>ans;
+        for(int i=0;i<queries.size();i++)
+        {
+            string a=queries[i][0];
+            string b=queries[i][1];
+            if(parent.find(a)==parent.end()|| parent.find(b)==parent.end() || findP(a)!=findP(b))
+            {
+                ans.push_back(-1.0);
+            }
+            else{
+                ans.push_back(weight[a]/weight[b]);
+            }
+        
+        }
+        return ans;
+    }
+};
