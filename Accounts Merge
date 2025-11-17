@@ -1,0 +1,59 @@
+https://leetcode.com/problems/accounts-merge/submissions/1832625947/
+
+class Solution {
+public:
+unordered_map<string,string>parent,emailToName;
+
+    string findP(string email)
+    {
+            if(parent[email]==email)return email;
+            else return parent[email]=findP(parent[email]);
+    }
+
+    void unionEmail(string a,string b)
+    {
+        string pa=findP(a);
+        string pb=findP(b);
+        if(pa!=pb){
+            parent[pb]=pa;
+        }
+    }
+
+
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        int n=accounts.size();
+        unordered_map<string,vector<string>>groups;
+        for(auto &account:accounts)
+        {
+            string name=account[0];
+            string firstEmail=account[1];
+
+            for(int i=1;i<account.size();i++)
+            {
+                string email=account[i];
+                if(parent.find(email)==parent.end()){
+                    parent[email]=email;
+                }
+                emailToName[email]=name;
+                unionEmail(firstEmail,email);
+            }
+        }
+        for(auto &p:parent)
+        {
+            string email=p.first;
+            string parentEmail=findP(email);
+            groups[parentEmail].push_back(email);
+        }
+        vector<vector<string>>ans;
+        for(auto &p:groups)
+        {
+            vector<string>emails=p.second;
+            sort(emails.begin(),emails.end());
+            emails.insert(emails.begin(),emailToName[p.first]);
+            ans.push_back(emails);
+
+        }
+            return ans;
+    }
+
+};
