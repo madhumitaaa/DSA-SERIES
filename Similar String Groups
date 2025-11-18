@@ -1,0 +1,56 @@
+https://leetcode.com/problems/similar-string-groups/submissions/1832811250/
+
+class Solution {
+public:
+unordered_map<string,string>parent;
+unordered_map<string,string>ans;
+
+string findP(string x)
+{
+   if(parent[x]==x)return x;
+   else return parent[x]=findP(parent[x]);
+}
+
+void unionS(string a,string b)
+{
+    string pa=findP(a);
+    string pb=findP(b);
+    if(pa!=pb)
+    {
+        parent[pb]=pa;
+    }
+}
+
+bool isSimilar(string a,string b)
+{
+    int diff=0;
+    for(int i=0;i<a.size();i++)
+    {
+        if(a[i]!=b[i])diff++;
+    }
+    if(diff>2)return false;
+     else return true;
+}
+
+
+
+    int numSimilarGroups(vector<string>& strs) {
+        int n=strs.size();
+        for(auto &s:strs)parent[s]=s;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(isSimilar(strs[i],strs[j])){
+                    unionS(strs[i],strs[j]);
+                }
+            }
+        }
+        unordered_set<string>groups;
+        for(auto &s:strs)
+        {
+            groups.insert(findP(s));
+        }
+        return groups.size();
+    }
+};
