@@ -1,0 +1,55 @@
+https://leetcode.com/problems/couples-holding-hands/submissions/1834082771/
+
+class Solution {
+public:
+vector<int>parent;
+vector<int>size;
+  int count=0;
+int findP(int x)
+{
+    if(parent[x]==x){
+        return x;
+    }
+    else return parent[x]=findP(parent[x]);
+}
+
+void unionS(int a,int b){
+    int pa=findP(a);
+    int pb=findP(b);
+    if(pa==pb)return;
+    if(size[pa]<size[pb]){
+        parent[pa]=pb;
+        size[pb]+=size[pa];
+    }
+    else{
+        parent[pb]=pa;
+        size[pa]+=size[pb];
+    }
+    count--;
+}
+
+
+
+
+    int minSwapsCouples(vector<int>& row) {
+        int n=row.size();
+        int couples=n/2;
+        parent.resize(couples);
+        size.resize(couples,1);
+      
+        for(int i=0;i<couples;i++)
+        {
+            parent[i]=i;
+            size[i]=1;
+            count++;
+        }
+        for(int i=0;i<couples;i++)
+        {
+            
+                int a=row[2*i]/2;
+                int b=row[2*i+1]/2;
+                    unionS(a,b);
+        }
+        return couples-count;
+    }
+};
