@@ -1,0 +1,36 @@
+https://leetcode.com/problems/course-schedule/submissions/1835582407/
+
+
+class Solution {
+public:
+
+bool dfs(int node,vector<vector<int>>& prerequisites,vector<vector<int>>&adj,vector<int>&visited)
+{
+    if(visited[node]==1)return false;
+    if(visited[node]==2)return true;
+    visited[node]=1;
+    for(int key:adj[node])
+    {
+        if(!dfs(key,prerequisites,adj,visited))return false;
+    }
+    visited[node]=2;
+    return true;
+   
+}
+
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>>adj(numCourses);
+        for(auto &i:prerequisites)
+        {
+            int a=i[0],b=i[1];
+            adj[b].push_back(a);
+        }
+
+    vector<int>visited(numCourses);
+    for(int i=0;i<numCourses;i++)
+    {
+        if(visited[i]==0&& !dfs(i,prerequisites,adj,visited))return false;
+    }
+return true;
+    }
+};
