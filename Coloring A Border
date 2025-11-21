@@ -1,0 +1,45 @@
+https://leetcode.com/problems/coloring-a-border/submissions/1836045748/
+
+class Solution {
+public:
+int m,n;
+vector<vector<int>>dir={{1,0},{-1,0},{0,1},{0,-1}};
+vector<vector<bool>>visited;
+vector<pair<int,int>>borders;
+
+void dfs(vector<vector<int>>& grid, int r, int c, int orgcolor)
+{
+    visited[r][c]=true;
+    int count=0;
+    for(auto &d:dir)
+    {
+        int nx=r+d[0];
+        int ny=c+d[1];
+        if(nx>=0&&ny>=0&&nx<m&&ny<n){
+        if(grid[nx][ny]==orgcolor)
+        {
+            count++;
+            if(!visited[nx][ny])dfs(grid,nx,ny,orgcolor);
+        }
+        }
+    }
+    if(count<4)
+    {
+        borders.push_back({r,c});
+    }
+}
+
+
+    vector<vector<int>> colorBorder(vector<vector<int>>& grid, int row, int col, int color) {
+        m=grid.size();
+        n=grid[0].size();
+        visited=vector<vector<bool>>(m,vector<bool>(n,false));
+        int orgcolor=grid[row][col];
+        dfs(grid,row,col,orgcolor);
+        for(auto &p:borders)
+        {
+            grid[p.first][p.second]=color;
+        }
+        return grid;
+    }
+};
