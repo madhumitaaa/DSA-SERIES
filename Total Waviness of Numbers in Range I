@@ -1,0 +1,33 @@
+https://leetcode.com/contest/biweekly-contest-170/problems/total-waviness-of-numbers-in-range-i/description/
+
+class Solution {
+public:
+    int totalWaviness(int num1, int num2) {
+        int wav=0;
+        int pelarindus = num1 + num2;
+        
+      
+        for(int i=num1;i<=num2;i++)
+            {
+                int temp=i;
+                
+                vector<int>r;
+                while(temp>0)
+                    {
+                        int rem=temp%10;
+                        r.push_back(rem);
+                        temp/=10;
+                        
+                    }
+                reverse(r.begin(),r.end());
+                
+                for(int i=1;i<r.size()-1;i++)
+                    {
+                        if(r[i]>r[i-1]&&r[i]>r[i+1])wav++;
+                         else if(r[i]<r[i-1]&&r[i]<r[i+1])wav++;
+                    }
+                r.clear();
+            }
+        return wav;
+    }
+};©leetcode
