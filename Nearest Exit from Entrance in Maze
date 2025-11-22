@@ -1,0 +1,50 @@
+https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/submissions/1836650749/
+
+class Solution {
+public:
+    int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
+        int m=maze.size();
+        int n=maze[0].size();
+        queue<pair<int,int>>q;
+        vector<vector<int>>dir={
+                {1,0},{0,1},{-1,0},{0,-1}
+        };
+        vector<vector<bool>>vis(m,vector<bool>(n,false));
+        int sr=entrance[0],sc=entrance[1];
+        q.push({sr,sc});
+        int steps=0;
+        vis[sr][sc]=true;
+        while(!q.empty())
+        {
+            int size=q.size();
+            
+            while(size--)
+            {
+                auto[r,c]=q.front();
+                q.pop();
+                for(auto &d:dir)
+                {
+                    int nr=r+d[0];
+                    int nc=c+d[1];
+                   if(nr<0||nr>=m||nc<0||nc>=n)continue;
+                   if(maze[nr][nc]=='+')continue;
+                   if(vis[nr][nc])continue;
+                    bool isBorder=(nr==0)||(nr==m-1)||(nc==0)||(nc==n-1);
+                    if(isBorder&&!(nr==r&&nc==c)){
+                        return steps+1;
+                    }
+                    vis[nr][nc]=true;
+                    q.push({nr,nc});
+
+                }
+               
+            }
+             steps++;
+            
+        }
+        return -1;
+       
+       
+
+    }
+};
