@@ -1,0 +1,37 @@
+https://leetcode.com/problems/gas-station/submissions/1839004785/
+
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        /*
+        “First, compute the cumulative tank and find the index where the tank becomes minimum.
+If total gas < total cost, return -1.
+Otherwise, the correct starting point is right after the minimum cumulative point.
+Finally, simulate starting from there—if the tank never drops below zero, that start index is valid.”
+        */
+        int n=gas.size();
+        int low_idx=-1;
+        int tank=0;
+        int lowest=INT_MAX;
+        for(int i=0;i<n;i++)
+        {
+            tank+=gas[i]-cost[i];
+            if(tank<lowest){
+                low_idx=i;
+                lowest=tank;
+            }
+
+        }
+        if(tank<0)return -1;
+       int start=(low_idx+1)%n;
+        int cnt=0;
+        for(int k=0;k<n;k++)
+        {
+           int idx=(start+k)%n;
+            cnt+=(gas[idx]-cost[idx]);
+            if(cnt<0)return -1;
+        }
+return start;
+    }
+};
