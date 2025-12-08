@@ -1,0 +1,54 @@
+https://leetcode.com/problems/count-vowel-substrings-of-a-string/submissions/1850320167/
+
+class Solution {
+public:
+//contraints continguous sequence of chars, only vowels,all five vowels present
+//pattern  sliding window istinct characters
+//how many substrings exist
+//distinct 5 = atmost 5-atmost 4
+   bool isvowel(char c)
+   {
+    return (c=='a'||c=='e'||c=='i'||c=='o'||c=='u');
+   }
+   int solve(string &word,int k)
+   {
+    int n=word.size();
+        unordered_map<char,int>mpp;
+        int l=0,r=0;
+        int ans=0,distinct=0;
+       while(r<n)
+        {
+            if(!isvowel(word[r]))
+            {
+                    mpp.clear();
+                    distinct=0;
+                    l=r+1;
+                    r++;
+                    continue;
+            }
+            
+              else
+           {
+             mpp[word[r]]++;
+            if(mpp[word[r]]==1)distinct++;
+            while(distinct>k)
+            {
+                mpp[word[l]]--;
+                if(mpp[word[l]]==0)distinct--;
+                l++;
+            }
+            ans+=r-l+1;
+        }
+           r++;
+        }
+        return ans; 
+    }
+
+   
+    int countVowelSubstrings(string word) {
+      int answer=0;
+      answer=solve(word,5)-solve(word,4);
+    return answer;
+    }
+
+};
