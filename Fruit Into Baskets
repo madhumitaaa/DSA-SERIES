@@ -1,0 +1,26 @@
+https://leetcode.com/problems/fruit-into-baskets/submissions/1851384660/
+
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        //need to find max no. of fruits we can pick
+        //only two baskets each can take one type of fruit
+        int n=fruits.size();
+        unordered_map<int,int>mpp;
+        int l=0,r=0,maxi=0;
+        while(r<n)
+        {
+            mpp[fruits[r]]++;
+            while(mpp.size()>2)
+            {
+                mpp[fruits[l]]--;
+                if(mpp[fruits[l]]==0)mpp.erase(fruits[l]);
+                l++;
+            }
+            maxi=max(maxi,r-l+1);
+            r++;
+
+        }
+return maxi;
+    }
+};
