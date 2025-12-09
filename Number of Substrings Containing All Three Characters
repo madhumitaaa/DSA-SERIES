@@ -1,0 +1,25 @@
+https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
+
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        //occurence of a,b,c in each substring
+        //return cnt of such substrings 
+        int n=s.size();
+        vector<int>mpp(3,0);
+        int l=0,r=0,cnt=0,distinct=0;
+        while(r<n)
+        {
+            mpp[s[r]-'a']++;
+            while(mpp[0]>0&&mpp[1]>0&&mpp[2]>0)
+            {
+                  cnt+=n-r;
+                mpp[s[l]-'a']--;
+                l++;
+            }
+          
+            r++;
+        }
+        return cnt;
+    }
+};
