@@ -1,0 +1,29 @@
+https://leetcode.com/problems/count-number-of-nice-subarrays/submissions/1851874898/
+
+class Solution {
+public:
+
+int solve(vector<int>& nums, int k)
+{
+       int n=nums.size();
+        long long l=0,r=0,maxi=0;
+        long long odd=0,ans=0;
+        while(r<n)
+        {
+       
+            if(nums[r]%2==1)odd++;
+             while(odd>k)
+             {
+                if(nums[l]%2==1)odd--;
+                l++;
+             }
+        ans+=r-l+1;
+        r++;
+        }
+        return ans;
+}
+    int numberOfSubarrays(vector<int>& nums, int k) {
+      long long answer=solve(nums,k)-solve(nums,k-1);
+      return answer;
+    }
+};
