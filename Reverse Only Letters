@@ -1,0 +1,22 @@
+https://leetcode.com/problems/reverse-only-letters/submissions/1854046668/
+
+class Solution {
+public:
+    string reverseOnlyLetters(string s) {
+        int n=s.size();
+        int l=0,r=n-1;
+        while(l<=r)
+        {
+            if(!isalpha(s[l]))l++;
+             else if(!isalpha(s[r]))r--;
+              else{
+                 swap(s[l],s[r]);
+                 l++;
+                 r--;
+              }
+
+
+        }
+        return s;
+    }
+};
