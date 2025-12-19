@@ -1,0 +1,38 @@
+https://leetcode.com/problems/magnetic-force-between-two-balls/submissions/1859684861/
+
+class Solution {
+public:
+    int maxDistance(vector<int>& position, int m) {
+        int n=position.size();
+        sort(position.begin(),position.end());
+        int left=1;
+        int right=position[n-1]-position[0];
+        int ans=0;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(isPossible(position,m,mid)){
+                    ans=mid;
+                    left=mid+1;
+            }
+            else{
+                right=mid-1;
+            }
+        }
+        return ans;
+    }
+    bool isPossible(vector<int>& position, int m,int mid)
+    {
+        int n=position.size();
+        int last=position[0];
+        int balls=1;
+        for(int i=1;i<n;i++)
+        {
+            if(position[i]-last>=mid){
+                balls++;
+                last=position[i];
+            }
+            
+        }
+        return balls>=m;
+    }
+};
