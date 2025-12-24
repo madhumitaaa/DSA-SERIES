@@ -1,0 +1,65 @@
+https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/submissions/1864318374/
+
+class Solution {
+public:
+    int minimumDifference(vector<int>& nums) {
+        int n=nums.size()/2;
+        int totalsum=accumulate(nums.begin(),nums.end(),0);
+        vector<int>A(nums.begin(),nums.begin()+n);
+        vector<int>B(nums.begin()+n,nums.end());
+        vector<vector<int>>left(n+1),right(n+1);
+        for( int mask=0;mask<(1<<n);mask++)
+        {
+            int sum=0,cnt=0;
+            for(int i=0;i<n;i++)
+            {
+                if(mask&(1<<i)){
+                    cnt++;
+                    sum+=A[i];
+                    
+                }
+                
+            }
+            left[cnt].push_back(sum);
+        }
+        for( int mask=0;mask<(1<<n);mask++)
+        {
+            int sum=0,cnt=0;
+            for(int i=0;i<n;i++)
+            {
+                if(mask&(1<<i)){
+                    cnt++;
+                    sum+=B[i];
+                    
+                }
+               
+            }
+            right[cnt].push_back(sum);
+        }
+        for(int i=0;i<n;i++)
+        {
+            sort(right[i].begin(),right[i].end());
+        }
+        int ans=INT_MAX;
+        for(int k=0;k<=n;k++)
+        {
+            for(int s:left[k])
+            {
+                int need=totalsum/2-s;
+                auto &vec=right[n-k];
+                auto it=lower_bound(vec.begin(),vec.end(),need);
+                if(it!=vec.end())
+                {
+                    ans=min(ans,abs(totalsum-2*(s+*it)));
+                }
+                if(it!=vec.begin())
+                {
+                    --it;
+                    ans=min(ans,abs(totalsum-2*(s+*it)));
+                }
+            }
+        }
+return ans;
+
+    }
+};
