@@ -1,0 +1,37 @@
+https://leetcode.com/problems/knight-dialer/submissions/1866426758/
+
+class Solution {
+public:
+const int MOD=1000000007;
+      int knightDialer(int n) {
+        vector<vector<long long>>dp(n+1,vector<long long>(10,0));
+        //d[[n][i]]number of distinct phonenumbers of length n that can be created by standing on i
+        vector<vector<int>>moves={
+            {4,6},{6,8},{7,9},{4,8},{0,3,9},{},{0,1,7},{2,6},{1,3},{2,4}
+        };
+         
+            for(int i=0;i<=9;i++)
+            {
+                dp[1][i]=1;
+            }
+         
+      for(int len=2;len<=n;len++)
+          {
+             for(int i=0;i<=9;i++)
+          {
+             for(int next:moves[i])
+             {
+                      dp[len][i]=(dp[len][i]+dp[len-1][next])%MOD;
+             }
+          
+          }
+       }
+
+     long long ans=0;
+     for(int d=0;d<=9;d++)
+     {
+        ans=(ans+dp[n][d])%MOD;
+     }
+     return ans;
+    }
+};
