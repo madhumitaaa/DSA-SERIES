@@ -1,0 +1,52 @@
+https://leetcode.com/problems/dice-roll-simulation/submissions/1876910240/
+
+
+class Solution {
+public:
+    int dieSimulator(int n, vector<int>& rollMax) {
+        const int MOD=1000000007;
+        int m=rollMax.size();
+        vector<vector<vector<long long>>>dp(
+            n+1,
+            vector<vector<long long>>(6,vector<long long>(16,0)));
+
+        //dp[len][lastface][count]=num of dis seq ending with last face nd it appears count times
+        for(int i=0;i<6;i++)
+        {
+            dp[1][i][1]=1;
+        }
+        long long ans=0;
+        for(int i=2;i<=n;i++)
+        {
+            for(int prevface=0;prevface<6;prevface++)
+            {
+                for(int cnt=1;cnt<=rollMax[prevface];cnt++)
+                {
+                   long long ways=dp[i-1][prevface][cnt];
+                   if(ways==0)continue;
+                   //same face
+                    if(cnt<rollMax[prevface])
+                    {
+                        dp[i][prevface][cnt+1]=(dp[i][prevface][cnt+1]+ways)%MOD;
+                    }
+                        for(int newface=0;newface<6;newface++)
+                        {
+                         if(newface==prevface)continue;
+                         dp[i][newface][1]=(dp[i][newface][1]+ways)%MOD;
+                        }
+                    
+                }
+            }
+        }
+     
+ for(int i=0;i<6;i++)
+ {
+    for(int count=1;count<=rollMax[i];count++)
+    {
+            ans=(ans+dp[n][i][count])%MOD;
+    }
+ 
+ }
+        return ans;
+    }
+};
