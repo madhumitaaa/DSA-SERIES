@@ -1,0 +1,32 @@
+https://leetcode.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/description/
+
+class Solution {
+public:
+
+static const int MOD=1000000007;
+   int solve(int steps, int arrLen,int index,vector<vector<long long>>&dp){
+    if(index<0||index>=arrLen)return 0;
+  
+   if(arrLen==1&&index==0)return 1;
+   if(steps==0)return index==0?1:0;
+  
+    if(dp[index][steps]!=-1)return dp[index][steps];
+    long long ans=0;
+
+    ans+=solve(steps-1,arrLen,index-1,dp);
+     ans+=solve(steps-1,arrLen,index+1,dp);
+      ans+=solve(steps-1,arrLen,index,dp);
+   
+    return dp[index][steps]=ans%MOD;
+ 
+   }
+
+
+
+
+    int numWays(int steps, int arrLen) {
+    arrLen=min(arrLen,steps+1);
+    vector<vector<long long>>dp(arrLen,vector<long long>(steps+1,-1));
+        return solve(steps,arrLen,0,dp);
+    }
+};
