@@ -1,0 +1,32 @@
+https://leetcode.com/problems/ones-and-zeroes/submissions/1883793416/
+
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+           //dp[m][n]=number of subsets with m 0's nd n 1's 
+          vector<vector<int>>dp(m+1,vector<int>(n+1,0));
+          int s=strs.size();
+          for(int i=0;i<s;i++)
+          {
+            string s2=strs[i];
+            int cz=0,co=0;
+            for(int j=0;j<s2.size();j++)
+            {
+                if(s2[j]=='0')cz++;
+                 else co++;
+
+            }
+                for(int z=m;z>=cz;z--) 
+                {
+                        for(int o=n;o>=co;o--)
+                        {
+                            dp[z][o]=max(dp[z][o],dp[z-cz][o-co]+1);
+                        }
+                }
+
+          }
+
+
+    return dp[m][n];
+    }
+};
