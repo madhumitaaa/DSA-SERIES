@@ -1,0 +1,30 @@
+https://leetcode.com/problems/minimum-number-of-refueling-stops/submissions/1892093758/
+
+class Solution {
+public:
+    int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
+         int n=stations.size();
+         //dp[i]farthest point i can reach with k refueling stops
+         vector<long long>dp(n+1,-1);
+         if(startFuel>=target)return 0;
+        dp[0]=startFuel;
+         for(auto &stop:stations)
+         {
+             int pos=stop[0];
+             int fuel=stop[1];
+            for(int i=n-1;i>=0;i--)
+            {
+                if(dp[i]>=pos){
+                    dp[i+1]=max(dp[i+1],dp[i]+fuel);
+                }
+
+            }
+         }
+            for(int i=0;i<=n;i++)
+            {
+                if(dp[i]>=target)return i;
+            }
+         
+         return -1;
+    }
+};
