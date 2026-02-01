@@ -1,0 +1,23 @@
+https://www.geeksforgeeks.org/problems/-minimum-number-of-coins4426/1
+
+class Solution {
+  public:
+    int findMin(int n) {
+        // code here
+      
+        int num=0,cnt=0;
+       
+         cnt+=n/10;
+         n=n%10;
+         cnt+=n/5;
+         n=n%5;
+         cnt+=n/2;
+         n=n%2;
+         cnt+=n/1;
+         n=n%1;
+            
+        
+        
+        return cnt;
+    }
+};
