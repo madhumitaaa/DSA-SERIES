@@ -8,17 +8,17 @@ public:
              if(a[0]==b[0])return a[1]>b[1];
              else return a[0]<b[0];
         });
-        int removal=0;
+        int remaining=0;
         int end=INT_MIN;
         for(int i=0;i<intervals.size();i++)
         {
             if(intervals[i][1]>end)
             {
-                  removal++;
+                  remaining++;
                 end=intervals[i][1];
             }
             
         }
-        return removal;
+        return remaining;
     }
 };
