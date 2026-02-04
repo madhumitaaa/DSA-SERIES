@@ -1,0 +1,38 @@
+https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1
+
+class Solution {
+  public:
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        vector<vector<int>>arr;
+        for(int i=0;i<val.size();i++)
+        {
+            arr.push_back({val[i],wt[i]});
+        }
+        sort(arr.begin(),arr.end(),[] (const vector<int>&a ,const vector<int>&b){
+        return (double) a[0]/a[1] > (double) b[0]/b[1];   
+        });
+      double total=0.0;
+      int remcapacity=capacity;
+      
+        for(auto a:arr)
+        {
+            int value=a[0];
+            int weight=a[1];
+            if(weight<=remcapacity)
+            {
+                total+=value;
+                remcapacity-=weight;
+                
+            }
+             else{
+                 double fraction=(double) remcapacity/weight;
+                 total+=value*fraction;
+                 break;
+             }
+            
+            
+        }
+        return total;
+    }
+};
