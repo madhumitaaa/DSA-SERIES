@@ -1,0 +1,36 @@
+https://leetcode.com/contest/weekly-contest-485/problems/maximum-capacity-within-budget/
+
+class Solution {
+public:
+    int maxCapacity(vector<int>& costs, vector<int>& capacity, int budget) {
+        int n=costs.size();
+        vector<pair<int,int>>v;
+        for(int i=0;i<costs.size();i++)
+            {
+                v.push_back({costs[i],capacity[i]});
+            }
+        sort(v.begin(),v.end());
+      priority_queue<pair<int,int>>pq;
+        int maxcap=0;
+        for(int i=0;i<n;i++)
+            {
+                int cost=v[i].first;
+                int capa=v[i].second;
+                if(cost<budget)
+                {
+                    maxcap=max(maxcap,capa);
+                }
+                while(!pq.empty()&& pq.top().second+cost>=budget){
+                    pq.pop();
+                }
+                if(!pq.empty()){
+                    maxcap=max(maxcap,capa+pq.top().first);
+                }
+                if(cost<budget)
+                {
+                    pq.push({capa,cost});
+                }
+            }
+return maxcap;
+    }
+};
