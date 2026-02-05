@@ -1,0 +1,32 @@
+https://leetcode.com/contest/weekly-contest-486/problems/rotate-non-negative-elements/submissions/1908972751/
+
+
+class Solution {
+public:
+    vector<int> rotateElements(vector<int>& nums, int k) {
+       int n=nums.size();
+
+        vector<int>v;
+        vector<int>ind;
+        for(int i=0;i<n;i++)
+            {
+                if(nums[i]>=0){
+                    v.push_back(nums[i]);
+                    ind.push_back(i);
+                }
+            
+            }
+        int m=v.size();
+        if(m==0)return nums;
+           k=k%m;
+        reverse(v.begin(),v.begin()+k);
+        reverse(v.begin()+k,v.end());
+            reverse(v.begin(),v.end());
+     
+        for(int i=0;i<m;i++)
+            {
+               nums[ind[i]]=v[i];
+            }
+        return nums;
+    }
+};
