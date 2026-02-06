@@ -1,0 +1,38 @@
+https://leetcode.com/contest/biweekly-contest-174/problems/best-reachable-tower/submissions/1910422316/
+
+class Solution {
+public:
+    vector<int> bestTower(vector<vector<int>>& towers, vector<int>& center, int radius) {
+        int n=towers.size();
+    int maxi=-1;
+    vector<int>temp={-1,-1};
+       
+        for(auto &t:towers)
+            {
+                int x=t[0];
+                int y=t[1];
+                int f=t[2];
+                int dist=abs(center[0]-x)+abs(center[1]-y);
+                if(dist>radius)continue;
+               
+                    if(f>maxi)
+                    {
+                        maxi=f;
+                        temp={x,y};
+                    }
+                    if(f==maxi)
+                    {
+                        if(temp[0]==-1 || x<temp[0]||(x==temp[0] && y<temp[1]))
+                        {
+                            temp={x,y};
+                        }
+                    }
+                   
+                
+
+            }
+   
+      
+          return temp;
+    }
+};
