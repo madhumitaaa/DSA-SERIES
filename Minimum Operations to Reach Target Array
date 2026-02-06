@@ -1,0 +1,17 @@
+https://leetcode.com/contest/biweekly-contest-174/problems/minimum-operations-to-reach-target-array/submissions/1910458138/
+
+class Solution {
+public:
+    int minOperations(vector<int>& nums, vector<int>& target) {
+        int n = nums.size();
+     unordered_set<int>need;
+        for(int i=0;i<n;i++) 
+            {
+              if(nums[i]!=target[i])
+              {
+                  need.insert(nums[i]);
+              }
+        }
+        return need.size();
+    }
+};
