@@ -1,0 +1,38 @@
+https://leetcode.com/problems/permutations-ii/submissions/1911716166/?envType=problem-list-v2&envId=array
+
+
+class Solution {
+public:
+
+    void helper(vector<int>& nums,vector<int>curr,vector<bool>&used,vector<vector<int>>&result)
+{
+            int n=nums.size();
+        if(curr.size()==nums.size()){
+            result.push_back(curr);
+            return;
+        }
+        for(int j=0;j<n;j++)
+        {
+            if(used[j]==true)continue;
+          
+         if(j>0 && nums[j]==nums[j-1] && used[j-1]==false)
+         {
+            continue;
+         }
+         curr.push_back(nums[j]);
+           used[j]=true;
+         helper(nums,curr,used,result);
+         curr.pop_back();
+         used[j]=false;
+        }
+}
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>result;
+        vector<int>curr;
+        vector<bool>used(n,false);
+        helper(nums,curr,used,result);
+        return result;
+    }
+};
