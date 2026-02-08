@@ -1,0 +1,33 @@
+https://leetcode.com/contest/weekly-contest-484/problems/number-of-centered-subarrays/submissions/1912476768/
+
+
+class Solution {
+public:
+    bool iscentered(vector<int>& sub,int h)
+    {
+         int sum=accumulate(sub.begin(),sub.end(),0);
+    
+        for(int i=0;i<h;i++)
+            {
+                if(sub[i]==sum)return true;
+            }
+        return false;
+    }
+    int centeredSubarrays(vector<int>& nums) {
+        int n=nums.size();
+        int cnt=0;
+         for(int i=0;i<n;i++)
+             {
+                  vector<int>sub;
+                 for(int j=i;j<n;j++)
+                     {
+                          sub.push_back(nums[j]);
+                         int h=sub.size();
+                         if(iscentered(sub,h))cnt++;
+                        
+                     }
+                         
+             }
+      return cnt; 
+    }
+};
