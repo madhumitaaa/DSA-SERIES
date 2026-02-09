@@ -1,0 +1,28 @@
+https://leetcode.com/contest/weekly-contest-483/problems/largest-even-number/submissions/1913878073/
+
+class Solution {
+public:
+    string largestEven(string s) {
+        string ans="";
+        /*
+1112=1112
+221=22
+1212=1212
+2121=212
+1122=1122
+2211=22
+121=12
+212=212
+            */
+        int j=0;
+    for(int i=s.length()-1;i>=0;i--)
+        {
+            if(s[i]=='2'){
+                j=i+1;
+                break;
+            }
+        }
+        ans=s.substr(0,j);
+        return ans;
+    }
+};
