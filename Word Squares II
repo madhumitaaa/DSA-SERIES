@@ -1,0 +1,35 @@
+https://leetcode.com/contest/weekly-contest-483/problems/word-squares-ii/description/
+
+class Solution {
+public:
+    vector<vector<string>> wordSquares(vector<string>& words) {
+        int n = words.size();
+        sort(words.begin(), words.end());
+        vector<vector<string>> ans;
+
+        for (int i = 0; i < words.size(); i++) {
+
+            for (int j = 0; j < words.size(); j++) {
+              
+                for (int k = 0; k < words.size(); k++) {
+                   
+                    for (int l = 0; l < words.size(); l++) {
+                        if (i==j || i==k || i==l || j==k || j==l ||k==l)
+                            continue;
+                        string &top = words[i];    // top
+                        string &left = words[j];   // left
+                        string &right = words[k];  // right
+                        string &bottom = words[l]; // bottom
+                        if (top[0] == left[0] && top[3] == right[0] && 
+                            bottom[0] == left[3] &&
+                            bottom[3] == right[3]) {
+                            ans.push_back({top, left, right, bottom});
+                        }
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+};
