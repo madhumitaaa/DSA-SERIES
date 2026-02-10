@@ -1,0 +1,13 @@
+https://leetcode.com/contest/biweekly-contest-173/problems/reverse-string-prefix/description/
+
+class Solution {
+public:
+    string reversePrefix(string s, int k) {
+        int n=s.size();
+  
+      
+        reverse(s.begin(),s.begin()+min(k,n));
+
+        return s;
+    }
+};
