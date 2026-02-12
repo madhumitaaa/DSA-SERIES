@@ -1,0 +1,29 @@
+https://leetcode.com/contest/weekly-contest-482/problems/maximum-score-of-a-split/
+
+class Solution {
+public:
+    long long maximumScore(vector<int>& nums) {
+        int n=nums.size();
+        vector<long long>pref(n);
+        vector<int>suff(n);
+        pref[0]=nums[0];
+        for(int i=1;i<n;i++)
+            {
+                pref[i]=pref[i-1]+nums[i];
+
+            }
+        suff[n-1]=nums[n-1];
+        for(int i=n-2;i>=0;i--)
+            {
+                suff[i]=min(nums[i],suff[i+1]);
+            }
+        long long maxsum=INT_MIN;
+        for(int i=0;i<n-1;i++)
+            {
+                long long sum=pref[i]-suff[i+1];
+                if(sum>maxsum)maxsum=sum;
+                
+            }
+        return maxsum;
+    }
+};
