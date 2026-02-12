@@ -1,0 +1,19 @@
+https://leetcode.com/contest/weekly-contest-481/problems/mirror-distance-of-an-integer/description/
+
+class Solution {
+public:
+    int findrev(int n)
+    {
+        int x=0;
+        while(n>0){
+        int rem=n%10;
+         x= x*10+rem;
+        n/=10;
+        }
+        return x;
+    }
+    int mirrorDistance(int n) {
+        int reverse=findrev(n);
+        return abs(n-reverse);
+    }
+};
