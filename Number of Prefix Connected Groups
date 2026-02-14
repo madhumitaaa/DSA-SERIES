@@ -1,0 +1,23 @@
+https://leetcode.com/contest/biweekly-contest-176/problems/number-of-prefix-connected-groups/submissions
+
+class Solution {
+public:
+    int prefixConnected(vector<string>& words, int k) {
+        auto copy=words;
+        unordered_map<string,int>mpp;
+        for(const string &w:copy)
+            {
+                if(w.length()>=k)
+                {
+                    string pref=w.substr(0,k);
+                    mpp[pref]++;
+                }
+            }
+        int groups=0;
+        for ( auto &[pref,c]:mpp)
+            {
+                if(c>=2)groups++;
+            }
+        return groups;
+    }
+};©leetcode
