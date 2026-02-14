@@ -1,0 +1,37 @@
+https://leetcode.com/contest/biweekly-contest-176/problems/weighted-word-mapping/description/
+
+class Solution {
+public:
+    string mapWordWeights(vector<string>& words, vector<int>& weights) {
+        int n=words.size();
+        string ans;
+        int a=0;
+        unordered_map<char,int>mp;
+        for(char c='z';c>='a';c--)
+            {
+                mp[c]=a;
+                a++;
+            }
+      
+       for(int i=0;i<n;i++)
+           {
+               string s=words[i];
+               long long sum=0;
+               for(int j=0;j<s.size();j++)
+                   {
+                       sum+=weights[s[j]-'a'];
+                   }
+                   
+               int r=sum%26;
+               for(auto &m:mp)
+                   {
+                       if(r==m.second){
+                           ans+=m.first;
+                       }
+                   }
+               
+           }
+        
+        return ans;
+    }
+};©leetcode
