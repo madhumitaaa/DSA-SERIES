@@ -1,0 +1,29 @@
+https://leetcode.com/contest/biweekly-contest-171/problems/complete-prime-number/submissions/1921101860/
+
+class Solution {
+public:
+    bool isPrime(int num)
+    {
+        if(num<=1)return false;
+        for(int i=2;i*i<=num;i++)
+            {
+                if(num%i==0)return false;
+            }
+        return true;
+    }
+    bool completePrime(int num) {
+        if(num<=1)return false;
+    string s=to_string(num);
+        for(int i=1;i<=s.length();i++)
+            {
+                long long prefix=stoll(s.substr(0,i));
+                if(!isPrime(prefix))return false;
+            }
+          for(int i=1;i<s.length();i++)
+            {
+                long long suffix=stoll(s.substr(i));
+                if(!isPrime(suffix))return false;
+            }
+        return true;
+    }
+};
