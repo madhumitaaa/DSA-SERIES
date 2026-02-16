@@ -1,0 +1,26 @@
+https://leetcode.com/contest/weekly-contest-479/problems/sort-integers-by-binary-reflection/description/
+
+#include<bits/stdc++.h>
+#include<bitset>
+class Solution {
+public:
+    vector<int> sortByReflection(vector<int>& nums) {
+        int n=nums.size();
+   vector< vector<int>>binary;
+        for(int i=0;i<n;i++)
+            
+        {
+            string bt=bitset<32>(nums[i]).to_string().substr(bitset<32>(nums[i]).to_string().find('1'));
+            reverse(bt.begin(),bt.end());
+            int bit=stoi(bt,nullptr,2);
+                binary.push_back({bit,nums[i]});
+            }
+        sort(binary.begin(),binary.end());
+        vector<int>ans;
+        for(int i=0;i<binary.size();i++)
+            {
+                ans.push_back(binary[i][1]);
+            }
+        return ans;
+    }
+};
