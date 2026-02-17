@@ -1,0 +1,24 @@
+https://leetcode.com/problems/car-pooling/
+
+class Solution {
+public:
+    bool carPooling(vector<vector<int>>& trips, int capacity) {
+        vector<int>diff(1001,0);
+        for(auto &t:trips)
+        {
+            int pass=t[0];
+            int l=t[1];
+            int r=t[2];
+            diff[l]+=pass;
+       
+           diff[r]-=pass;
+        }
+        int currpassengers=0;
+        for(int i=0;i<=1000;i++)
+        {
+                currpassengers+=diff[i];
+                if(currpassengers>capacity)return false;
+        }
+        return true;
+    }
+};
