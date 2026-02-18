@@ -1,0 +1,13 @@
+https://leetcode.com/contest/weekly-contest-478/problems/maximum-substrings-with-distinct-start/
+
+class Solution {
+public:
+    int maxDistinct(string s) {
+        unordered_map<int,int>freq;
+        for(char c:s)
+            {
+                freq[c]++;
+            }
+        return freq.size();
+    }
+};
