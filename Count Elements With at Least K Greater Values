@@ -1,0 +1,17 @@
+https://leetcode.com/contest/weekly-contest-478/problems/count-elements-with-at-least-k-greater-values/description/
+
+#include<bits/stdc++.h>
+class Solution {
+public:
+    int countElements(vector<int>& nums, int k) {
+        int n=nums.size();
+      if(k==0)return n;
+        sort(nums.begin(),nums.end());
+        int cnt=0;
+        int maxi=nums[n-k];
+  
+             cnt=lower_bound(nums.begin(),nums.end(),maxi)-nums.begin();
+         
+        return cnt;
+    }
+};
