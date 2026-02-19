@@ -1,0 +1,21 @@
+http://geeksforgeeks.org/problems/count-subarray-with-given-xor/1
+
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int k) {
+        // code here
+        int n=arr.size();
+        unordered_map<int,int>mpp;
+        mpp[0]=1;
+        long long cnt=0,prefix=0;
+        for(int a:arr)
+        {
+            prefix^=a;
+            if(mpp.find(prefix^k)!=mpp.end()){
+                cnt+=mpp[prefix^k];
+            }
+            mpp[prefix]++;
+        }
+        return  cnt;
+    }
+};
