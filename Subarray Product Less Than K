@@ -6,7 +6,7 @@ public:
         int n = nums.size();
         int left = 0;
         int mult = 1, count = 0;
-        for (right = 0; right < n; right++) {
+        for (int right = 0; right < n; right++) {
             mult *= nums[right];
             while (mult >= k && left<=right) {
                 mult /= nums[left];
