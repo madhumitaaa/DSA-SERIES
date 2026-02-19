@@ -1,0 +1,37 @@
+https://leetcode.com/problems/longest-well-performing-interval/submissions/1924603672/
+
+class Solution {
+public:
+    int longestWPI(vector<int>& hours) {
+        int n=hours.size();
+        for(int i=0;i<n;i++)
+        {
+            if(hours[i]>8)hours[i]=1;
+             else hours[i]=-1;
+        }
+        vector<int>prefix(n+1,0);
+        for(int i=0;i<n;i++)
+        {
+            prefix[i+1]=prefix[i]+hours[i];
+        }
+        stack<int>st;
+        int ans=0;
+        for(int j=0;j<=n;j++)
+        {
+             if(st.empty()||prefix[j]<prefix[st.top()])
+                {
+                    st.push(j);
+                }
+        }
+        for(int r=n;r>=0;r--)
+        {
+            
+                while(!st.empty()&&prefix[r]>prefix[st.top()])
+                {
+                        ans=max(ans,r-st.top());
+                        st.pop();
+                }
+        }
+return ans;
+    }
+};
