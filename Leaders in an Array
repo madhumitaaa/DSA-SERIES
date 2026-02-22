@@ -1,0 +1,20 @@
+https://takeuforward.org/plus/dsa/problems/leaders-in-an-array
+
+class Solution {
+public:
+    vector<int> leaders(vector<int>& nums) {
+      int n=nums.size();
+      vector<int>ans;
+      int maxright=nums[n-1];
+      ans.push_back(maxright);
+      for(int i=n-2;i>=0;i--)
+      {
+            if(nums[i]>maxright){
+                ans.push_back(nums[i]);
+                maxright=max(maxright,nums[i]);
+            }
+      }
+      reverse(ans.begin(),ans.end());
+      return ans;
+    }
+};
