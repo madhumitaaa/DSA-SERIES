@@ -1,0 +1,29 @@
+https://leetcode.com/problems/two-sum/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        vector<pair<int,int>>numswithidx;
+        for(int i=0;i<n;i++)
+        {
+            numswithidx.push_back({nums[i],i});
+        }
+        int l=0,r=n-1;
+        sort(numswithidx.begin(),numswithidx.end());
+        while(l<r)
+        {
+            if(numswithidx[l].first+numswithidx[r].first==target)
+            {
+                return {numswithidx[l].second,numswithidx[r].second};
+            }
+              else if(numswithidx[l].first+numswithidx[r].first<target)
+            {
+                l++;
+            }
+             else r--;
+
+        }
+        return {};
+    }
+};
