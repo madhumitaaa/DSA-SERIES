@@ -1,0 +1,28 @@
+https://leetcode.com/problems/next-greater-element-iii/description/
+
+class Solution {
+public:
+    int nextGreaterElement(int n) {
+        vector<long long>vec;
+        while(n>0){
+            int d=n%10;
+            vec.push_back(d);
+            n/=10;
+        }
+        reverse(vec.begin(),vec.end());
+      if(!next_permutation(vec.begin(),vec.end())){
+        return -1;
+      }
+      else{
+        string s;
+        for(int i=0;i<vec.size();i++)
+        {
+            s+=vec[i]+'0';
+        }
+         long long num =stoll(s);
+        if(num>INT_MAX)return -1;
+         else  return num;
+      }
+      return -1;
+    }
+};
