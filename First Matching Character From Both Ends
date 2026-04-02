@@ -1,0 +1,15 @@
+https://leetcode.com/contest/weekly-contest-495/problems/first-matching-character-from-both-ends/submissions/1966485814/
+
+class Solution {
+public:
+    int firstMatchingIndex(string s) {
+        int n=s.size();
+        int l=0,r=n-1;
+        while(l<=r){
+            if(s[l]==s[r]&&r+l==n-1)return l;
+            l++;
+            r--;
+        }
+        return -1;
+    }
+};
